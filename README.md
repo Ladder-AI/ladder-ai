@@ -3,7 +3,7 @@
 Custom Ladder implementation on any Complex problem for LLM. a reimplementation of the paper “LADDER: SELF-IMPROVING LLMS THROUGH RECURSIVE PROBLEM DECOMPOSITION”
 https://arxiv.org/pdf/2503.00735
 
-![workflow](./assets/ladder.svg)
+![workflow](./assets/workflow_version2.svg)
 
 # setup
 
@@ -16,6 +16,8 @@ pdm install
 ```
 
 # Run
+
+## our main usecase (Graph problem)
 
 ```bash
 python main.py
