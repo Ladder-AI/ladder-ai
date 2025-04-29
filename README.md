@@ -31,6 +31,8 @@ python src/main.py
 - [ ] Generate subproblems according to the model intelligence ratio
 - [ ] Difficulty Engine should decide the level of difficulty to be generated and what transformations to be applied
 - [ ] Verification engine should use the small llm to be tuned not the Larger one
+- [ ] Custom Verification Method if required (for our Graph Usecase)
+- [ ] LLM Engine (temperature cycling and persona based prompts for different operations like variant generation)
 
 ### Ladder
 
@@ -44,6 +46,8 @@ python src/main.py
 
 ### Others
 
+- [ ] General Configurations for all Constants and Hyper Parameters
 - [ ] implement different interfaced for different models to be used (HF, Ollama,..)
 - [ ] LLMS Benchmarking
 - [ ] Metrics and other evaluation methods
+- [ ] implement more usecases if required for diverse benchmarking
