@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from ladder.llms import LLMType, FinetunedLLMType
+from ladder.engines import LLMType, FinetunedLLMType
 from typing_extensions import Annotated, Doc 
 
 
