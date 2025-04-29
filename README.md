@@ -1,6 +1,7 @@
 # Ladder + TTFT
 
-Custom Ladder implementation on any Complex problem for LLM. a reimplementation of the paper “LADDER: SELF-IMPROVING LLMS THROUGH RECURSIVE PROBLEM DECOMPOSITION” arxiv.org
+Custom Ladder implementation on any Complex problem for LLM. a reimplementation of the paper “LADDER: SELF-IMPROVING LLMS THROUGH RECURSIVE PROBLEM DECOMPOSITION”
+https://arxiv.org/pdf/2503.00735
 
 ![workflow](./assets/ladder.svg)
 
