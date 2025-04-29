@@ -22,3 +22,28 @@ pdm install
 ```bash
 python src/main.py
 ```
+
+## TODO
+
+### Dataset Generation
+
+- [ ] LLM Intelligence ratio Equation
+- [ ] Generate subproblems according to the model intelligence ratio
+- [ ] Difficulty Engine should decide the level of difficulty to be generated and what transformations to be applied
+- [ ] Verification engine should use the small llm to be tuned not the Larger one
+
+### Ladder
+
+- [ ] Ladder Finetuning Process
+- [ ] GRPO Implementation
+
+### TTRL
+
+- [ ] TTRL Implementation
+- [ ] Data Generation in a loop
+
+### Others
+
+- [ ] implement different interfaced for different models to be used (HF, Ollama,..)
+- [ ] LLMS Benchmarking
+- [ ] Metrics and other evaluation methods

@@ -1,8 +1,8 @@
 
+from ladder.data_gen.schema import SubProblem, Transformation, Problem, Dataset
 from ladder.engines import VerificationEngine, DifficultyEngine
 from typing_extensions import Annotated, Doc
 from ladder.engines import LLMEngine
-from ladder.data_gen.schema import SubProblem, Transformation, Problem, Dataset
 from typing import Optional
 from loguru import logger
 import dspy 
@@ -239,6 +239,8 @@ class DatasetGenerator(dspy.Module):
         ## Loop over current dataset and filter which is difficult to be solved by the llm
         logger.info("Filtering inital examples")
         for problem in self.problems:
+
+            ## TODO:: this verification engine should use the small llm to be tuned not the Larger one 
             verification_ratio = self.verification_engine.verify(problem=problem) # 0: unsolved , 1: solved
             j += 1
             if verification_ratio < 0.5:
