@@ -20,5 +20,5 @@ pdm install
 ## our main usecase (Graph problem)
 
 ```bash
-python main.py
+python src/main.py
 ```
