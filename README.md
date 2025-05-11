@@ -27,7 +27,7 @@ python src/main.py
 
 ### Dataset Generation
 
-- [ ] LLM Intelligence ratio Equation
+- [x] LLM Intelligence ratio Equation
 - [ ] Generate subproblems according to the model intelligence ratio
 - [ ] Difficulty Engine should decide the level of difficulty to be generated and what transformations to be applied
 - [ ] Verification engine should use the small llm to be tuned not the Larger one

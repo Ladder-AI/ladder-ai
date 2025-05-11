@@ -36,8 +36,11 @@ llm_engine = LLMEngine(lm=base_inference_llm)
 
 ## Verification 
 class GraphVerificationEngine(VerificationEngine):
-    ...
-    # TODO:: override verify method to implement out custom verification process
+    
+    def verify(self, problem):
+        # TODO:: override verify method to implement out custom verification process
+        return super().verify(problem)
+    
     
 verification_engine = GraphVerificationEngine(llm_engine=llm_engine) # LLM That will be used in dataset generation could be larger than llm used in finetuning
 

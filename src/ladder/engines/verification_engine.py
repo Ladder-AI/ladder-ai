@@ -1,6 +1,7 @@
 from ladder.engines.llm_engine import LLMEngine
 from ladder.data_gen.schema import Problem
 from typing import Callable
+from typing import overload
 import dspy
 
 
@@ -33,6 +34,7 @@ class VerificationEngine(dspy.Module):
 
         self.problem_solution_verifier = dspy.ChainOfThought(ProblemSolutionVerifier)
 
+    @overload
     def verify(self, problem: Problem) -> float:
         """Automated verification of LLM Solution
 

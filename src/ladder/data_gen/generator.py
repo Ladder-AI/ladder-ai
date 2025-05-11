@@ -1,12 +1,11 @@
-
 from ladder.data_gen.schema import SubProblem, Transformation, Problem, Dataset
 from ladder.engines import VerificationEngine, DifficultyEngine
 from typing_extensions import Annotated, Doc
 from ladder.engines import LLMEngine
 from typing import Optional
 from loguru import logger
-import dspy 
 import random 
+import dspy 
 
 # HYPERPARAMETERS
 INITIAL_DATASET_SIZE = 10 # inital dataset bedore starting in the generation process should be 10
@@ -32,7 +31,7 @@ class ProblemVerification(dspy.Signature):
     
 
 class ProblemGenerator(dspy.Signature):
-    """used in dataset initalization process to generate new problem if required"""
+    """ used in dataset initalization process to generate new problem if required """
     problem_description: str = dspy.InputField(prefix="problem_description: ", 
                                                format=str, 
                                                desc="A string containing the problem description, from which we have to define new problem , with its solution , ..")
@@ -223,24 +222,17 @@ class DatasetGenerator(dspy.Module):
         By the end of this method we have to have at least 10 problems (atleast 80% of them couldbe solved by llm)
         """
         logger.warning("PRE_STEP2:: Generating initial dataset of problems that will be used in the variants generation process \n")
-        # TODO:: we need to limit the number of problems to verify 
 
-
-        # This will be our final output from this step
-        unsolved_problems: list[Problem] = [] # we need to have at least 10 unsolved problems
+        unsolved_problems: list[Problem] = []
         transformations_used: list[Transformation] = []
-        model_intelligence_ratio = 0 # somehow define the model intelligence level (1: the model is super smart)
 
+        weighted_success_sum = 0.0
+        difficulty_sum = 0.0
         _partial_solved_dataset = set()
-        j = 0 # Track all parsed problems (used to define model intelligence level)
+        j = 0
 
-        
-        # 1- filter List of inital datasets which are solved by llm
-        ## Loop over current dataset and filter which is difficult to be solved by the llm
         logger.info("Filtering inital examples")
         for problem in self.problems:
-
-            ## TODO:: this verification engine should use the small llm to be tuned not the Larger one 
             verification_ratio = self.verification_engine.verify(problem=problem) # 0: unsolved , 1: solved
             j += 1
             if verification_ratio < 0.5:
@@ -250,63 +242,61 @@ class DatasetGenerator(dspy.Module):
                 if verification_ratio < 0.8 and len(_partial_solved_dataset) < 2:
                     _partial_solved_dataset.add(problem)
                     unsolved_problems.append(problem)
-            
-            model_intelligence_ratio += self._estimate_current_intelligence_level(
-                                            Si=verification_ratio,
-                                            Di=problem.difficulty_level
-                                        )
-        
+
+            # Accumulate weighted score and difficulty
+            weighted_success_sum += self.estimate_current_llm_intelligence_level(
+                Si=verification_ratio,
+                Di=problem.difficulty_level
+            )
+            difficulty_sum += problem.difficulty_level
+
         # 2- complete generating new dataset if < 10
         make_it_easier = None
-        max_trials_per_problem = 3 # if we keep increasing problem difficulty and the model solved it after 3 trials we add it evenso
-        
-        
+        max_trials_per_problem = 3
+
         logger.warning(f"Generating new Datasets")
         while len(unsolved_problems) < self.max_datasets_to_generate:
-            # 1- generate new problem
-            if  make_it_easier == None or max_trials_per_problem >= 3:
+            if make_it_easier is None or max_trials_per_problem >= 3:
                 new_problem = self._generate_new_problem()
                 transformations = []
                 max_trials_per_problem = 0
 
             elif make_it_easier:
-                # Make problem easier
-                new_problem, transformations = self.difficulty_engine.change_problem_difficulty(problem=new_problem, 
-                                                                               model_intelligence_ratio=model_intelligence_ratio,
-                                                                               increase_difficulty=False)
+                new_problem, transformations = self.difficulty_engine.change_problem_difficulty(
+                    problem=new_problem, 
+                    model_intelligence_ratio=model_intelligence_ratio,
+                    increase_difficulty=False
+                )
             else:
-                # make it harder
-                new_problem,transformations = self.difficulty_engine.change_problem_difficulty(problem=new_problem, 
-                                                                               model_intelligence_ratio=model_intelligence_ratio,
-                                                                               increase_difficulty=True)
-            # 2- extend used transformations
+                new_problem, transformations = self.difficulty_engine.change_problem_difficulty(
+                    problem=new_problem, 
+                    model_intelligence_ratio=model_intelligence_ratio,
+                    increase_difficulty=True
+                )
             transformations_used.extend(transformations)
 
-            # 3- verify solution 
-            verification_ratio = self.verification_engine.verify(problem=new_problem) # si 0: unsolved , 1: solved
+            verification_ratio = self.verification_engine.verify(problem=new_problem)
             j += 1
 
             if verification_ratio < 0.5: 
                 unsolved_problems.append(new_problem)
-                # next problem to be generated should be easier than this one
                 make_it_easier = True
-
             else:
-                make_it_easier = False # next problem to be generated should be harder than this one
+                make_it_easier = False
                 new_problem.is_solvable = True
                 max_trials_per_problem += 1
                 if verification_ratio < 0.8 and len(_partial_solved_dataset) < 2:
                     _partial_solved_dataset.add(new_problem)
                     unsolved_problems.append(new_problem)
-            
-            
-            # 4- update model intelligence level (problem_difficulty, verification_ratio)
-            model_intelligence_ratio +=  self._estimate_current_intelligence_level(
-                                            Si=verification_ratio,
-                                            Di=new_problem.difficulty_level
-                                        )
-        if model_intelligence_ratio:
-            model_intelligence_ratio /= j
+
+            weighted_success_sum += self.estimate_current_llm_intelligence_level(
+                Si=verification_ratio,
+                Di=new_problem.difficulty_level
+            )
+            difficulty_sum += new_problem.difficulty_level
+
+        # Compute final intelligence ratio (always in [0, 1])
+        model_intelligence_ratio = (weighted_success_sum / difficulty_sum) if difficulty_sum > 0 else 0.0
 
         logger.success("(PRE_STEP) Generating initial dataset of problems that will be used in the variants generation process is done \n")
         return unsolved_problems, model_intelligence_ratio, transformations_used
@@ -384,13 +374,19 @@ class DatasetGenerator(dspy.Module):
         """ utils to generate new problem"""
         return self._problem_generator(problem_description=self.problem_description).new_problem
 
-    def _estimate_current_intelligence_level(self, Si:float, Di:float):
+    def estimate_current_llm_intelligence_level(self, Si:float, Di:float):
         """ utils to estimate the current intelligence level of the model
             according to 
             - problem_difficulty (Di) where 0 means easy and 1 means super hard
             - solvability_ration (Si) >> where 0 means model failed to solve and 1 means model solved it perfectly
 
-            (Di * Si - (1 - Di) * (1 - Si) * alpha) , alpha =0.5: boosting factor
+            # (Di * Si - (1 - Di) * (1 - Si) * alpha) , alpha =0.5: boosting factor
+
+            Intelligence Ratio= 
+
+            ∑ Si * Di 
+            _____________
+            ∑ Di
         """
-        ## TODO:: recheck this equeation and make sure that it is always positive
-        return Si * Di - (1 - Di) * (1 - Si) * 0.5 ## ::hyperparameter
+        # Si * Di - (1 - Di) * (1 - Si) * 0.5 ## ::hyperparameter
+        return Si * Di

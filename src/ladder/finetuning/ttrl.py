@@ -4,7 +4,6 @@ from ladder.engines import VerificationEngine
 from ladder.data_gen.generator import DatasetGenerator
 from ladder.engines import FinetunedLLMType
 
-
 class TTRL(FinetuningEngine):
     """ Finetuning Engine using TTRL Algorithm
     """
@@ -30,7 +29,6 @@ class TTRL(FinetuningEngine):
 
         self.verification_engine = verification_engine
         self.dataset_generator = dataset_generator
-    
 
     def __call__(self, *args, **kwargs):
         return super().__call__(*args, **kwargs)
