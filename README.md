@@ -5,6 +5,10 @@ https://arxiv.org/pdf/2503.00735
 
 ![workflow](./assets/workflow_version2.svg)
 
+## Finetuned Qwen2-0.5B with Ladder (Model Response)
+
+![Ladder-Finetuned](./assets/finetuned-ladder-answer.png)
+
 # setup
 
 ## install from source using PDM
@@ -56,7 +60,7 @@ python src/main.py
 
 ### Production
 
-- [] Documentation
-- [] packaging
-- [] CICD
-- [] Testing
+- [ ] Documentation
+- [ ] packaging
+- [ ] CICD
+- [ ] Testing
