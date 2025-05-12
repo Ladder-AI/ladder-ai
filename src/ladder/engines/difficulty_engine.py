@@ -56,4 +56,4 @@ class DifficultyEngine(dspy.Module):
             - transformations: List of transformation(s) used to change the problem difficulty            
         """
         out = self.difficulty_adapter(problem=problem,model_intelligence_ratio=model_intelligence_ratio, increase_difficulty=increase_difficulty)
-        return out.out_problem, out.transformations
+        return out.out_problem, out.transformations # TODO:: check schema 

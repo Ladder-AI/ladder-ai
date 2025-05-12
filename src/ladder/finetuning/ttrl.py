@@ -2,7 +2,6 @@ from typing_extensions import Annotated, Doc, Optional, Any
 from ladder.finetuning import FinetuningEngine
 from ladder.engines import VerificationEngine
 from ladder.data_gen.generator import DatasetGenerator
-from ladder.engines import FinetunedLLMType
 
 class TTRL(FinetuningEngine):
     """ Finetuning Engine using TTRL Algorithm
@@ -10,8 +9,8 @@ class TTRL(FinetuningEngine):
 
     def __init__(self,
                  *,
-                 base_llm: Annotated[Optional[FinetunedLLMType], Doc(
-                     """Base LLM to be tuned"""
+                 base_llm: Annotated[Optional[str], Doc(
+                     """Base LLM to be finetuned, hf compatible models"""
                  )] = None,
                  verification_engine: Annotated[VerificationEngine, Doc(
                      """Problem Verification Engine"""

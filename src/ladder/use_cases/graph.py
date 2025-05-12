@@ -2,7 +2,8 @@
     This is our Main Usecase (Graph theory Problems)
 """
 
-from ladder.engines import LLMEngine, VerificationEngine,DifficultyEngine, FinetunedLLMType, LM
+
+from ladder.engines import LLMEngine, VerificationEngine,DifficultyEngine, LM
 from ladder.data_gen.generator import DatasetGenerator
 from ladder.finetuning import Ladder, TTRL
 from ladder.utils import load_json
@@ -13,16 +14,19 @@ import os
 
 load_dotenv()
 
+# TODO:: convert to jupyter notebook
+
+
 # 0- Setup Dependencies 
 
 ## LLM
 # if u wanna use differet model  check here 
 ## https://dspy.ai/learn/programming/language_models/
 os.environ["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY") # put here your openai api key 
-base_inference_llm = LM("openai/gpt-3.5-turbo")
+base_inference_llm = "openai/gpt-3.5-turbo"
 
 ## LLM To Tune 
-base_finetune_llm = FinetunedLLMType.LLAMA_2_13B_CHAT # This LLM will be used during finetuning
+base_finetune_llm = "meta-llama/Llama-2-7b-chat-hf" # This LLM will be used during finetuning
 
 ## Problem description 
 problem_description = """
@@ -38,7 +42,6 @@ llm_engine = LLMEngine(lm=base_inference_llm)
 class GraphVerificationEngine(VerificationEngine):
     
     def verify(self, problem):
-        # TODO:: override verify method to implement out custom verification process
         return super().verify(problem)
     
     
@@ -83,36 +86,21 @@ def generate_or_load_dataset(dataset_path:str,
    
     return dataset 
 
+
 def ladder(dataset_path: str = None):
     """ Ladder Algorithm"""
+    raise NotImplementedError
     
-    # 1- Generate Dataset (3 steps, verification engine, difficulty engine)
-    vladder_dataset = generate_or_load_dataset(dataset_path=dataset_path)
-
-    ## 2- Finetuning - Ladder
-    ladder = Ladder(vladder=vladder_dataset, base_llm=base_finetune_llm)
-    finetuned_model = ladder.finetune()
-
-    return finetuned_model
 
 
-def ttrl(model: Any = None, base_llm: FinetunedLLMType = None):
+def ttrl(model: Any = None, base_llm: str = None):
     """TTRL Algorithm
     
     Args:
     model: if provided it will be used as base model for finetuning 
     base_llm: if model is None , it will be used as base model for finetuning
     """
-    ## 3- TTRL 
-    ttrl_enigne = TTRL(
-        tuned_model=model,
-        base_llm=base_llm,
-        verification_engine=verification_engine,
-        dataset_generator=dataset_generator
-    )
-    ladder_ttrl_model = ttrl_enigne.finetune()
-    return ladder_ttrl_model
-
+    raise NotImplementedError
 
 if __name__ == "__main__":
     

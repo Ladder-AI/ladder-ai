@@ -1,22 +1,11 @@
 from typing_extensions import Doc, Annotated
-from enum import Enum
 import dspy 
-
-
-class FinetunedLLMType(str, Enum):
-    """ List of LLM Types that will be used during the finetuning process """
-    LLAMA_2_7B_CHAT = "llama-2-7b-chat-hf"
-    LLAMA_2_13B_CHAT = "llama-2-13b-chat-hf"
-    MISTRAL_7B_INSTRUCT = "mistral-7b-instruct"
-    MIXTRAL_8X7B = "mixtral-8x7b"
-    GPT_4_TURBO = "gpt-4-turbo"
 
 
 class LM(dspy.LM):
     """
     A Language Model that will be used for inference
     """
-
 
 class LLMEngine:
     """ LLM Service
@@ -30,10 +19,12 @@ class LLMEngine:
 
     def __init__(self, 
                  *,
-                 lm: Annotated[LM, Doc("""Language Model to be used for inference""")]) -> None:
-        self.lm = lm
+                 lm: Annotated[ str, Doc("""Language Model to be used for inference""")]) -> None:
+        self.lm = dspy.LM(lm)
+        dspy.configure(lm=self.lm)
     
 
+    # TODO:: complete these methods 
     def temperature_cycling(self):
         ...
     

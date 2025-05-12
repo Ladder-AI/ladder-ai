@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field 
+from datasets import Dataset as HFDataset
 from typing import Optional
 from loguru import logger 
 import json 
@@ -17,7 +18,7 @@ class SubProblem(BaseModel):
     transformations_applid : Optional[list[Transformation]] = Field(description="List of transformations applied to the problem", default=[])
     sub_question: str = Field(description="Sub question, which we hope to be solvable by small LLM")
     difficulty_level: Optional[float] = Field(description="Difficulty level of the sub problem from 0 to 1 where 0 is easy and 1 is super hard", default=None)
-    answer: Optional[str] = Field(description="Correct answer for the problem", default=None)
+    sub_answer: Optional[str] = Field(description="Correct answer for the subproblem", default=None)
 
 class Problem(BaseModel):
     """Problem Schema"""
@@ -27,6 +28,79 @@ class Problem(BaseModel):
     difficulty_level: Optional[float] = Field(description="Difficulty level of the problem, from 0 to 1 where 0 is easy and 1 is super hard ", default=0)
     is_solvable: bool = Field(description="Whether the problem is solvable or not by small llm to be tuned", default=False)
 
+    
+
+# VLadder 
+class VLADDERItem(BaseModel):
+    """ represents a single vatiant / subproblem"""
+    prompt: str
+    completion: Optional[str] = ""
+    reward: float
+    original_question: str
+    difficulty_level: float
+    transformations_applied: list[Transformation]
+    parent_id: Optional[str] = None  # Optional, for tree structure
+    root_id: Optional[str] = None    # Optional, for grouping
+
+class VLadder(BaseModel):
+    """ VLadder dataset schema used in ladder trainined process """
+    items: list[VLADDERItem] = []
+    def to_hf_dataset(self) -> HFDataset:
+        """ convert vladder dataset to hf dataset """
+        # Convert to dict of lists for HF Dataset
+        dict_data = {field: [getattr(item, field) for item in self.items]
+                     for field in VLADDERItem.model_fields}
+        return HFDataset.from_dict(dict_data)
+
+    @staticmethod
+    def from_hf_dataset(hf_dataset: HFDataset):
+        """ convert hf dataset to vladder dataset """
+        # TODO:: verify schema / fields first 
+        ds = hf_dataset
+        vladder = VLadder()
+        # Convert to VLadder format
+        vladder.items = [VLADDERItem(
+            prompt=item["prompt"],
+            completion=item["completion"],
+            reward=item["reward"],
+            original_question=item["original_question"],
+            difficulty_level=item["difficulty_level"],
+            transformations_applied=item["transformations_applied"]
+        ) for item in ds]
+        return vladder
+    
+
+    def split(self, ratio: float) -> tuple["VLadder", "VLadder"]:
+        """ split vladder dataset into train and test sets """
+        train_size = int(len(self.items) * ratio)
+        train = VLadder(items=self.items[:train_size])
+        test = VLadder(items=self.items[train_size:])
+        return train, test
+    
+
+    def apply_pattern(self, pattern: str):
+        """
+            Apply a specific formatting pattern to all completions in the VLadder dataset.
+            
+            Example:
+                If pattern = "Answer: {}"
+                Original completion: "The path is balanced."
+                Transformed: "Answer: The path is balanced."
+            
+            Args:
+                pattern (str): A string pattern to format completions. Use `{}` as placeholder.
+        """
+        problems = self.items
+        for problem in problems:
+            if '{}' in pattern:
+                problem.completion = pattern.format(problem.completion)
+            else:
+                problem.completion = pattern + problem.completion  # fallback: prepend pattern
+            
+        return self
+
+# This is the main schema flow for finetuing 
+# Dataset > VLadder > HFDataset
 
 class Dataset(BaseModel):
     """Dataset Schema"""
@@ -51,3 +125,43 @@ class Dataset(BaseModel):
         with open(export_path, "w") as f:
             f.write(json_str)
         logger.success(f"Dataset exported successfully at {export_path}")
+    
+    @staticmethod
+    def load_dataset(path: str, name: Optional[str] = None, split: Optional[str] = None, **kwargs) -> "Dataset":
+        """
+        Load a dataset compatible with the Hugging Face `datasets` library.
+
+        Args:
+            path (str): Path to the dataset script or JSON/CSV file.
+            name (str, optional): Dataset name (if loading from HF hub).
+            split (str, optional): Which split to load (e.g., "train", "test").
+            **kwargs: Additional arguments passed to `datasets.load_dataset`.
+
+        Returns:
+            DatasetDict or Dataset: The loaded dataset.
+        """
+        # HF Datasets to Dataset
+        from datasets import load_dataset as _load_dataset
+        ds =  _load_dataset(path, name=name, split=split, **kwargs)
+        # TODO:: verify if it matches the Dataset schema 
+        # TODO:: convert to the vladder format (check if it matches the Dataset schema)
+
+    
+    def to_vladder(self):
+        """ convert dataset to vladder format """
+        # Dataset to VLadder
+        vladder = VLadder()
+        for problem in self.problems:
+            for sub_problem in problem.sub_problems:
+                item = VLADDERItem(
+                    prompt=sub_problem.sub_question,
+                    completion=sub_problem.sub_answer,
+                    reward=1,
+                    original_question=problem.question,
+                    difficulty_level=problem.difficulty_level,
+                    transformations_applied=sub_problem.transformations_applid
+                )
+                vladder.items.append(item)
+        return vladder
+
+

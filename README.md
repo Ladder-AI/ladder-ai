@@ -28,16 +28,17 @@ python src/main.py
 ### Dataset Generation
 
 - [x] LLM Intelligence ratio Equation
-- [ ] Generate subproblems according to the model intelligence ratio
+- [x] Custom Verification Method if required (for our Graph Usecase)
+- [ ] DatasetGenerator > Generate subproblems according to the model intelligence ratio (step3)
 - [ ] Difficulty Engine should decide the level of difficulty to be generated and what transformations to be applied
 - [ ] Verification engine should use the small llm to be tuned not the Larger one
-- [ ] Custom Verification Method if required (for our Graph Usecase)
 - [ ] LLM Engine (temperature cycling and persona based prompts for different operations like variant generation)
 
 ### Ladder
 
-- [ ] Ladder Finetuning Process
-- [ ] GRPO Implementation
+- [x] Ladder Finetuning Process
+- [x] GRPO Implementation
+- [x] reward functions
 
 ### TTRL
 
@@ -47,7 +48,15 @@ python src/main.py
 ### Others
 
 - [ ] General Configurations for all Constants and Hyper Parameters
-- [ ] implement different interfaced for different models to be used (HF, Ollama,..)
+- [ ] implement different interfaced for different models to be used (HF, Ollama, VLLM, deepspeed, LiteLLM,..)
 - [ ] LLMS Benchmarking
 - [ ] Metrics and other evaluation methods
 - [ ] implement more usecases if required for diverse benchmarking
+- [ ] use accelerate / PEFT / deepspeed and vllm to speed up training process
+
+### Production
+
+- [] Documentation
+- [] packaging
+- [] CICD
+- [] Testing

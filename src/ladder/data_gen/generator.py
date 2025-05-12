@@ -1,5 +1,11 @@
-from ladder.data_gen.schema import SubProblem, Transformation, Problem, Dataset
+from ladder.data_gen.schema import  Transformation, Problem, Dataset
 from ladder.engines import VerificationEngine, DifficultyEngine
+from ladder.data_gen.steps import (ProblemGenerator, 
+                                   ProblemVerification, 
+                                   TransformationLibrary, 
+                                   VariantGenerator, 
+                                   RecursiveVariantsTree,
+                                   _SubProblemTester)
 from typing_extensions import Annotated, Doc
 from ladder.engines import LLMEngine
 from typing import Optional
@@ -8,105 +14,9 @@ import random
 import dspy 
 
 # HYPERPARAMETERS
+# TODO:: move to configs
 INITIAL_DATASET_SIZE = 10 # inital dataset bedore starting in the generation process should be 10
 
-
-class ProblemVerification(dspy.Signature):
-    """PRESTEP1:: Verify if the problem is suitable for Ladder Finetuning
-
-    For the problem to be suitable for Ladder Finetuning, it should meet the following criteria:
-        1. Verification process could be automated (dummy as we can pass verification engine as a proof)
-        2. Problem Could have multiple difficulty Level
-        3. Variants Generation is Possible for each problem (one can generate different variants for the same problem)
-    """
-    problem_description: str = dspy.InputField(prefix="problem_description: ", 
-                                               format=str, 
-                                               desc="A string containing the problem description, from which the transformations will be defined")
-    
-    
-    description : str = dspy.OutputField(format=str, 
-                                                   desc="A string explaining why this problem is suitable or not for Ladder Finetuning")
-    is_ladder_suitable: bool = dspy.OutputField(format=bool, 
-                                          desc="Boolean value that indicates if the problem is suitable for Ladder Finetuning")
-    
-
-class ProblemGenerator(dspy.Signature):
-    """ used in dataset initalization process to generate new problem if required """
-    problem_description: str = dspy.InputField(prefix="problem_description: ", 
-                                               format=str, 
-                                               desc="A string containing the problem description, from which we have to define new problem , with its solution , ..")
-    
-    new_problem: Problem = dspy.OutputField(format=Problem, 
-                                            desc="new generated dataset item / problem that will be used later in the finetuning process (only question, answer and difficulty level)")
-    
-
-class TransformationLibrary(dspy.Signature):
-    """
-    STEP1:: You are given a problem description and your job is to generate list of transformations 
-    that will be used in the variants generation process. This should be considered as the first step 
-    in the dataset generation process.
-    """
-    problem_description: str = dspy.InputField(prefix="problem_description: ", 
-                                               format=str, 
-                                               desc="A string containing the problem description, from which the transformations will be defined")
-    # example_problem: Optional[Problem] = dspy.InputField(format=Problem, 
-    #                                            desc="A string containing an example problem which the model failed to solve")
-
-    model_intelligence_ratio: float = dspy.InputField(prefix="model_intelligence_ratio: ",
-                                                       format=float,
-                                                       desc="decide the difficulty threshold after which the model cant solve the problem")
-    
-    make_easier : bool = dspy.InputField(prefix="make_easier: ",
-                                         format=bool,
-                                         desc="whether to generate transformations that make the problem easier or not")
-    transformations: list[str] = dspy.OutputField(format=list[str], 
-                                                desc="""List of transformation strings that will be used in the variants generation process. 
-                                                Each string should be formatted as: " <transformation_description> || <difficulty_level>"
-                                                where <difficulty_level> is a float indicating the transformation's difficulty. If this value is larger than 
-                                                the model_intelligence_ratio, it means this transformation makes the problem harder, and vice versa.
-                                                For example: "Add time constraints to the problem || 0.8" """)
-    
-    # TODO:: Transoforamtion now is generated from the problem description (fixed step outside loop) later this should be anthor reasoning task
-    # that should generate required description according to specific task or problem (not general description)
-
-class VariantGenerator(dspy.Signature):
-    """
-    STEP2:: You are given a specific problem / task and your job is to generate list of variants of this problem 
-    by randomly applying transformations to the problem description. This should be considered as the second step 
-    in the dataset generation process.
-    """
-    transformations: list[str] = dspy.InputField(prefix="transformations: ", 
-                                                 format=list[str], 
-                                                 desc="List of transformations that will be used in the variants generation process")
-    problem: Problem = dspy.InputField(format=Problem, 
-                                       desc="A problem from which we should generate new variants")
-    
-    variants: list[Problem] = dspy.OutputField(format=list[str], 
-                                           desc="List of new variants / problems generated by applying transformations to the problem")
-
-
-class RecursiveVariantsTree(dspy.Signature):
-    """
-    STEP3:: You are given a specific problem / task and your job is to generate list of variants of this problem 
-    by recursively applying transformations to the problem description to make it more easier up to N difficulty Levels. This should be considered as the third step 
-    in the dataset generation process.
-    """
-    transformations: list[str] = dspy.InputField(prefix="transformations: ", 
-                                                 format=list[str], 
-                                                 desc="List of transformations that will be used in the variants generation process")
-    
-    problem: Problem = dspy.InputField(format=Problem,
-                                       desc="A problem from which we should generate new subproblems which should be easier for the model to solve")
-    
-    # TOOD:: maybe we need here too the model intelligence level
-    n: int = dspy.InputField(prefix="N: ", 
-                             format=int, 
-                             desc="Number of difficulty levels to go  down") # TODO:: this should be generated dynamically from the difficulty Engine
-    sub_variants: list[SubProblem] = dspy.OutputField(format=list[str], 
-                                           desc="List of variants/ subproblems that will be used later as the core part for Ladder finetuning process")
-
-    # during this step we need to identify too if the problem is solvable or not and its difficulty level
-    # (this should be difficulty engine task)
 
 class DatasetGenerator(dspy.Module):
     """ Generate required dataset for specific problem
@@ -362,13 +272,20 @@ class DatasetGenerator(dspy.Module):
     def generate_recursive_variants_tree(self,transformations: list[Transformation]) -> None:
         """STEP3:: generate List of variants that will be used in the variants generation process"""
         logger.warning(f"STEP3:: Generate recursive subproblems per each problem")
+
+        subproblem_tester = _SubProblemTester(
+            llm_engine=self.llm_engine,
+            difficulty_engine=self.difficulty_engine
+        )
         for problem in self.problems:
-            # if problem is hard to be solved by llm then try to make it easier and vice versa
-            if True: # >> use problem.difficulty_level > self.model_intelligence_ratio this  if not problem.is_solvable: when verifying variants above
-                subproblems = self.recursive_variants_tree_generation(problem=problem, 
-                                                                        transformations=random.choices(transformations, k=5),
-                                                                        n=3).sub_variants
-                problem.sub_problems = subproblems
+            # Generate 3-5 subproblems per each problem
+            n = random.randint(3, 5)
+            subproblems = subproblem_tester.generate_subproblems(base_problem=problem, n=n)
+            # subproblems = self.recursive_variants_tree_generation(problem=problem, 
+            #                                                         transformations=random.choices(transformations, k=5),
+            #                                                         n=3).sub_variants
+            problem.sub_problems = subproblems
+            logger.info(f"Generated {len(subproblems)} subproblems for problem {problem.question}")
 
     def _generate_new_problem(self) -> Problem:
         """ utils to generate new problem"""

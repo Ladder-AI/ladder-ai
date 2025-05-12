@@ -1,7 +1,53 @@
-from ladder.use_cases.graph import generate_or_load_dataset, ladder, ttrl
+from ladder import setup_default_engines, generate_dataset, load_basic_configs, load_dataset
+from ladder.finetuning import Ladder
+from dotenv import load_dotenv
+from loguru import logger
+from huggingface_hub import login
 import dspy 
+import os 
 
+load_dotenv()
 dspy.disable_logging()
 
-# TODO:: add configs here like llm and other hyper paramaters
-dataset = generate_or_load_dataset(dataset_path="dataset.json", force_regenerate=False)
+os.environ["HF_TOKEN"] = os.environ.get("HF_TOKEN")
+# make sure to create .env file and add your openai api key
+os.environ["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY") 
+
+# login to huggingface hub
+login(token=os.environ.get("HF_TOKEN"))
+
+
+def load_vladder():
+    logger.warning("1- Loading dataset...")
+    # dataset = generate_dataset(problem_description, config)
+    dataset = load_dataset("../data/graph/dataset7.json")
+    vladder_dataset = dataset.to_vladder() # or VLadder.from_hf_dataset(dataset)
+    vladder_dataset.apply_pattern("Answer: {}")
+    logger.success("Dataset loaded successfully")
+    return vladder_dataset
+
+
+# 0- basic config
+problem_description = """
+                    Title: Balanced Paths in Weighted Directed Graphs 
+                    Description: In a directed graph  G=(V,E) with weighted edges, a path is considered balanced if, for every intermediate vertex  v∈V {s,t}, 
+                    the sum of the weights of edges entering v along the path equals the sum of the weights of edges leaving  v along the path. The graph may contain arbitrary weights, 
+                    including positive, negative, or zero values. The structure and properties of such paths depend on the topology of the graph and the distribution of weights.    
+                    """
+config = load_basic_configs(push_to_hub=True, hub_model_id="ladder-v1") # LLM > openai/gpt-3.5-turbo, Qwen/Qwen2-0.5B
+
+# 1- Load / generate vladder  
+vladder_dataset = load_vladder()
+
+# split dataset 
+Qtrain, Qtest = vladder_dataset.split(0.8)
+
+# # 2- (finetune)
+logger.warning("2- Start finetuning")
+_, verification_engine, _ = setup_default_engines(config=config)
+ladder = Ladder(vladder=Qtrain, config=config,verification_engine=verification_engine, reward_funcs=[]) # add custom reward functions as u need 
+finetuned_model = ladder.finetune(save_locally=True)
+logger.success("Model finetuned successfully")
+
+# # 3- export model (make it compatible with HF)
+# finetuned_model.push_to_hub()
