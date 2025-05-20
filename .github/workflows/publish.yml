@@ -5,6 +5,10 @@ on:
     tags:
       - "v*"
 
+  push:
+    branches:
+      - main
+
 jobs:
   pypi-publish:
     name: upload release to PyPI
