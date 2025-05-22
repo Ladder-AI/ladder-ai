@@ -20,5 +20,9 @@ jobs:
       - uses: pdm-project/setup-pdm@v4
         with:
           version: "head"
+      - name: Install project dependencies
+        run: pdm install
+      - name: Build package
+        run: pdm build
       - name: Publish package distributions to PyPI
         run: pdm publish
