@@ -1,4 +1,4 @@
-from ladder import setup_default_engines, load_basic_configs, load_dataset
+from ladder import setup_default_engines, load_basic_configs, load_dataset, generate_dataset
 from ladder.finetuning import Ladder
 from huggingface_hub import login
 from dotenv import load_dotenv
@@ -19,7 +19,8 @@ login(token=os.environ.get("HF_TOKEN"))
 
 def load_vladder():
     logger.warning("1- Loading dataset...")
-    # dataset = generate_dataset(problem_description, config)
+    # TODO:: add param to generate_dataset like samlple examples 
+    # dataset = generate_dataset(problem_description=problem_description, config=config, dataset_len=10)
     dataset = load_dataset("../data/graph/dataset7.json")
     vladder_dataset = dataset.to_vladder() # or VLadder.from_hf_dataset(dataset)
     vladder_dataset.apply_pattern("Answer: {}")
@@ -36,18 +37,25 @@ problem_description = """
                     """
 config = load_basic_configs(push_to_hub=True, hub_model_id="ladder-v1") # LLM > openai/gpt-3.5-turbo, Qwen/Qwen2-0.5B
 
+
+# TODO:: add anthor option for create new dataset from scratch 
 # 1- Load / generate vladder  
 vladder_dataset = load_vladder()
-
 # split dataset 
 Qtrain, Qtest = vladder_dataset.split(0.8)
+
 
 # # 2- (finetune)
 logger.warning("2- Start finetuning")
 _, verification_engine, _ = setup_default_engines(config=config)
+
+# TODO:: add schema for reward functinos , verification engine override 
 ladder = Ladder(vladder=Qtrain, config=config,verification_engine=verification_engine, reward_funcs=[]) # add custom reward functions as u need 
 finetuned_model = ladder.finetune(save_locally=True)
 logger.success("Model finetuned successfully")
 
 # # 3- export model (make it compatible with HF)
 # finetuned_model.push_to_hub()
+
+# Docs 
+

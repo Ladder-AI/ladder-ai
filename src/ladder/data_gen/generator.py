@@ -165,6 +165,7 @@ class DatasetGenerator(dspy.Module):
         max_trials_per_problem = 3
 
         logger.warning(f"Generating new Datasets")
+        current_model_intelligence_ratio = weighted_success_sum / difficulty_sum
         while len(unsolved_problems) < self.max_datasets_to_generate:
             if make_it_easier is None or max_trials_per_problem >= 3:
                 new_problem = self._generate_new_problem()
@@ -174,13 +175,13 @@ class DatasetGenerator(dspy.Module):
             elif make_it_easier:
                 new_problem, transformations = self.difficulty_engine.change_problem_difficulty(
                     problem=new_problem, 
-                    model_intelligence_ratio=model_intelligence_ratio,
+                    model_intelligence_ratio=current_model_intelligence_ratio,
                     increase_difficulty=False
                 )
             else:
                 new_problem, transformations = self.difficulty_engine.change_problem_difficulty(
                     problem=new_problem, 
-                    model_intelligence_ratio=model_intelligence_ratio,
+                    model_intelligence_ratio=current_model_intelligence_ratio,
                     increase_difficulty=True
                 )
             transformations_used.extend(transformations)
@@ -204,6 +205,8 @@ class DatasetGenerator(dspy.Module):
                 Di=new_problem.difficulty_level
             )
             difficulty_sum += new_problem.difficulty_level
+
+            current_model_intelligence_ratio = weighted_success_sum / difficulty_sum if difficulty_sum > 0 else 0
 
         # Compute final intelligence ratio (always in [0, 1])
         model_intelligence_ratio = (weighted_success_sum / difficulty_sum) if difficulty_sum > 0 else 0.0

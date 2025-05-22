@@ -25,6 +25,8 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+docs/
+**/docs
 
 **/trainer_output
 **/ladder_finetuned_model

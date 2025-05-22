@@ -61,6 +61,6 @@ python src/main.py
 ### Production
 
 - [ ] Documentation
-- [ ] packaging
-- [ ] CICD
+- [x] packaging
+- [x] CICD
 - [ ] Testing

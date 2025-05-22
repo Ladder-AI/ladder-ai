@@ -4,7 +4,7 @@ from ladder.engines import LLMEngine
 from typing import Optional
 import dspy 
 
-class DifficultyAdapter(dspy.Signature):
+class _DifficultyAdapter(dspy.Signature):
     """ utils to make the problem harder or easier 
         according to 
         - increase_difficulty (will decide either to increase or decrease difficulty)
@@ -35,7 +35,7 @@ class DifficultyEngine(dspy.Module):
     """ This Engine will be used to change the problem difficulty, estimate the difficulty levels 
     """
 
-    difficulty_adapter = dspy.ChainOfThought(DifficultyAdapter)
+    difficulty_adapter = dspy.ChainOfThought(_DifficultyAdapter)
 
     def __init__(self, 
                  *,
