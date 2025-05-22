@@ -14,6 +14,7 @@ def load_basic_configs(hub_model_id="ladder", push_to_hub=True, **kwargs: dict):
         hub_model_id=hub_model_id,
         bf16=True,
         output_dir=hub_model_id,
+        report_to=None,
         **kwargs
     )
     return config

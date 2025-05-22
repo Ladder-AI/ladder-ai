@@ -60,5 +60,5 @@ dataset = generate_dataset(problem_description=problem_description, config=confi
 
 # Docs 
 
-# git tag -a v0.1.2 -m "Release version 0.1.2"
-# git push origin v0.1.2  
+# git tag -a v0.1.3 -m "Release version 0.1.3"
+# git push origin v0.1.3

@@ -150,16 +150,34 @@ class Dataset(BaseModel):
     def to_vladder(self):
         """ convert dataset to vladder format """
         # Dataset to VLadder
+        # TODO:: recheck this design 
+        # vladder = VLadder()
+        # for problem in self.problems:
+        #     for sub_problem in problem.sub_problems:
+        #         if isinstance(sub_problem, tuple) or isinstance(sub_problem, list):
+        #             sub_problem = sub_problem[0]
+        #         item = VLADDERItem(
+        #             prompt=sub_problem.sub_question,
+        #             completion=sub_problem.sub_answer,
+        #             reward=1,
+        #             original_question=problem.question,
+        #             difficulty_level=problem.difficulty_level,
+        #             transformations_applied=sub_problem.transformations_applid
+        #         )
+        #         vladder.items.append(item)
+
         vladder = VLadder()
         for problem in self.problems:
             for sub_problem in problem.sub_problems:
+                if isinstance(sub_problem, tuple) or isinstance(sub_problem, list):
+                    sub_problem = sub_problem[0]
                 item = VLADDERItem(
-                    prompt=sub_problem.sub_question,
-                    completion=sub_problem.sub_answer,
+                    prompt=sub_problem.question,
+                    completion=sub_problem.answer,
                     reward=1,
                     original_question=problem.question,
                     difficulty_level=problem.difficulty_level,
-                    transformations_applied=sub_problem.transformations_applid
+                    transformations_applied= [] # sub_problem.transformations_applid
                 )
                 vladder.items.append(item)
         return vladder

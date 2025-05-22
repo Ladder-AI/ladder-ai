@@ -290,7 +290,7 @@ class DatasetGenerator(dspy.Module):
             #                                                         transformations=random.choices(transformations, k=5),
             #                                                         n=3).sub_variants
             problem.sub_problems = subproblems
-            logger.info(f"Generated {len(subproblems)} subproblems for problem {problem.question}")
+            logger.info(f"Generated {len(subproblems)} ") # subproblems for problem {problem.question}
 
     def _generate_new_problem(self) -> Problem:
         """ utils to generate new problem"""
