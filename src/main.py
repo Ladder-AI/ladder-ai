@@ -59,4 +59,5 @@ logger.success("Model finetuned successfully")
 
 # Docs 
 
-# git tag -a v0.1.1 -m "Release version 0.1.1"
+# git tag -a v0.1.2 -m "Release version 0.1.2"
+# git push origin v0.1.2  
