@@ -131,7 +131,10 @@ class _SubProblemTester:
         This verification can be based on similarity or exact matching of the response.
         """
         # Assuming subproblem has a 'solution' field that holds the expected solution
-        return response.strip() == subproblem.solution.strip()
+        # TODO:: can we do this verification using verification_engine
+        if isinstance(response, list):
+            response = response[0]
+        return response.strip() == subproblem.sub_answer.strip()
 
     def adjust_difficulty(self, subproblem: SubProblem, solve_success: bool) -> SubProblem:
         """
