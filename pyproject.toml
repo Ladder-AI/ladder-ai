@@ -1,6 +1,6 @@
 [project]
 name = "ladder-ai"
-version = "0.1.0"
+version = "0.1.1"
 description = "Ladder + TTFT LLM Finetuning"
 authors = [
     {name = "abdelrahman abounida", email = "abdelrahmanaboneda@gmail.com"},

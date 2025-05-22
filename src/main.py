@@ -59,3 +59,4 @@ logger.success("Model finetuned successfully")
 
 # Docs 
 
+# git tag -a v0.1.1 -m "Release version 0.1.1"
