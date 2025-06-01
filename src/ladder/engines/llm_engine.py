@@ -1,11 +1,7 @@
+from ladder.llms import BaseLM
 from typing_extensions import Doc, Annotated
 import dspy 
 
-
-class LM(dspy.LM):
-    """
-    A Language Model that will be used for inference
-    """
 
 class LLMEngine:
     """ LLM Service
@@ -19,8 +15,8 @@ class LLMEngine:
 
     def __init__(self, 
                  *,
-                 lm: Annotated[ str, Doc("""Language Model to be used for inference""")]) -> None:
-        self.lm = dspy.LM(lm)
+                 lm: Annotated[ BaseLM, Doc("""Language Model to be used for inference""")]) -> None:
+        self.lm = dspy.LM(lm) if isinstance(lm, str) else lm
         dspy.configure(lm=self.lm)
     
 

@@ -25,7 +25,7 @@ class DatasetGenerator(dspy.Module):
     2. Variants Generation
     3. Recursive Variants Tree 
     """
-
+    
     def __init__(self,*,
                     problem_description: Annotated[str, Doc(
                     """A string containing the problem description, from which the transformations will be defined"""
@@ -63,7 +63,7 @@ class DatasetGenerator(dspy.Module):
         self.max_datasets_to_generate = max_dataset_to_generate
 
     def forward(self) -> Dataset:
-        """ Main generation process done here """
+        """ Main generation process of dataset done here """
 
         with dspy.settings.context(lm=self.llm_engine.lm, show_guidelines=False):
             ## Verify Problem for Ladder Algorithm 
@@ -278,6 +278,7 @@ class DatasetGenerator(dspy.Module):
         """STEP3:: generate List of variants that will be used in the variants generation process"""
         logger.warning(f"STEP3:: Generate recursive subproblems per each problem")
 
+        # TODO:: transformations should be selected by difficulty engine
         subproblem_tester = _SubProblemTester(
             llm_engine=self.llm_engine,
             difficulty_engine=self.difficulty_engine
@@ -290,7 +291,7 @@ class DatasetGenerator(dspy.Module):
             #                                                         transformations=random.choices(transformations, k=5),
             #                                                         n=3).sub_variants
             problem.sub_problems = subproblems
-            logger.info(f"Generated {len(subproblems)} ") # subproblems for problem {problem.question}
+            logger.debug(f"Generated {len(subproblems)} subproblems") # subproblems for problem {problem.question}
 
     def _generate_new_problem(self) -> Problem:
         """ utils to generate new problem"""

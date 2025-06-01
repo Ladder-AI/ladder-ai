@@ -142,16 +142,16 @@ class _SubProblemTester:
         If solved, increase difficulty; if not, decrease difficulty.
         """
         if solve_success:
-            # Make the problem harder
-            new_subproblem = self.difficulty_engine.change_problem_difficulty(
-                problem=subproblem, 
+            # Make the subproblem harder
+            new_subproblem, _ = self.difficulty_engine.change_subproblem_difficulty(
+                subproblem=subproblem, 
                 model_intelligence_ratio=0.8,  # Adjust as necessary
                 increase_difficulty=True
             )
         else:
-            # Make the problem easier
-            new_subproblem = self.difficulty_engine.change_problem_difficulty(
-                problem=subproblem, 
+            # Make the subproblem easier
+            new_subproblem, _ = self.difficulty_engine.change_subproblem_difficulty(
+                subproblem=subproblem, 
                 model_intelligence_ratio=0.8,  # Adjust as necessary
                 increase_difficulty=False
             )

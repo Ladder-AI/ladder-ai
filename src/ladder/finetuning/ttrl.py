@@ -9,8 +9,8 @@ class TTRL(FinetuningEngine):
 
     def __init__(self,
                  *,
-                 base_llm: Annotated[Optional[str], Doc(
-                     """Base LLM to be finetuned, hf compatible models"""
+                 target_llm: Annotated[Optional[str | Any], Doc(
+                     """Target LLM to be finetuned, hf compatible models"""
                  )] = None,
                  verification_engine: Annotated[VerificationEngine, Doc(
                      """Problem Verification Engine"""
@@ -23,7 +23,7 @@ class TTRL(FinetuningEngine):
                  )] = None
                  ):
         # One of these models should be provided TODO:: verify
-        self.base_llm = base_llm
+        self.target_llm = target_llm
         self.tuned_model = tuned_model
 
         self.verification_engine = verification_engine

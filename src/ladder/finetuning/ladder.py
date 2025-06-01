@@ -13,6 +13,7 @@ try:
     from transformers import AutoTokenizer, AutoModelForCausalLM, PreTrainedModel
 except ImportError:
     logger.error("trl is not installed. Please install trl using `pip install trl transformers`")
+    raise ImportError("trl is not installed. Please install trl using `pip install trl transformers`")
 
 # RewardFunc can be a string, model, or callable that accepts two lists and returns a list of floats.
 RewardFunc = Union[str, PreTrainedModel, Callable[[list, list], list[float]]]
@@ -40,7 +41,7 @@ class Ladder(FinetuningEngine):
             grpo_config (Optional[GRPOConfig]): GRPO-specific configuration.
             out_model_path (Optional[str]): Path to save the finetuned model.
         """
-        self.base_llm = config.finetune_base_llm
+        self.base_llm = config.target_finetune_llm
         self._config = config
         
         self.completion_pattern = completion_pattern

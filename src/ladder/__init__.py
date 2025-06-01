@@ -1,14 +1,24 @@
 from ladder.engines import LLMEngine, VerificationEngine, DifficultyEngine
-from ladder.data_gen.generator import DatasetGenerator, Dataset
+from ladder.data_gen import VLadder, Dataset
+from ladder.data_gen.generator import DatasetGenerator
+from ladder.finetuning import Ladder, TTRL
 from ladder.config import LadderConfig
+from dotenv import load_dotenv
+from typing import Callable, Optional
 from loguru import logger
+import dspy 
 import os 
+
+load_dotenv()
+dspy.disable_logging()
+
+
 
 # 1- define configs 
 def load_basic_configs(hub_model_id="ladder", push_to_hub=True, **kwargs: dict):
     config = LadderConfig(
-        finetune_base_llm="Qwen/Qwen2-0.5B",
-        inference_base_llm="openai/gpt-3.5-turbo",
+        target_finetune_llm="Qwen/Qwen2-0.5B",
+        instructor_llm="openai/gpt-3.5-turbo",
         max_steps=3,
         push_to_hub=push_to_hub,
         hub_model_id=hub_model_id,
@@ -22,7 +32,7 @@ def load_basic_configs(hub_model_id="ladder", push_to_hub=True, **kwargs: dict):
 def setup_default_engines(config: LadderConfig) -> tuple[LLMEngine, VerificationEngine, DifficultyEngine]:
     """ setup basic required engines for dataset generation process and ladder finetuning"""
 
-    llm_engine = LLMEngine(lm=config.inference_base_llm)
+    llm_engine = LLMEngine(lm=config.instructor_llm)
 
     verification_engine = (
         VerificationEngine(llm_engine=llm_engine) 
@@ -33,7 +43,7 @@ def setup_default_engines(config: LadderConfig) -> tuple[LLMEngine, Verification
     return llm_engine, verification_engine, difficulty_engine
 
 
-def generate_dataset(*,
+def create_dataset(*,
                     config: LadderConfig,
                     problem_description: str, 
                     dataset_len: int) -> Dataset:
@@ -57,3 +67,31 @@ def load_dataset(dataset_path:str):
         raise FileNotFoundError
     return Dataset.from_json(dataset_path)
 
+
+def finetune_model(*,
+                   vladder_dataset: VLadder,
+                   config: LadderConfig,
+                   reward_funcs: list[Callable] = [],
+                   verification_engine: Optional[VerificationEngine] = None,
+                   use_ttrl: bool = False,
+                   **kwargs
+                   ):
+    Qtrain, _ = vladder_dataset.split(0.8)
+
+    ### Load Engines
+    if not verification_engine:
+        llm_engine = LLMEngine(lm=config.instructor_llm)
+        verification_engine = VerificationEngine(llm_engine=llm_engine)
+
+    ### Ladder
+    ladder = Ladder(vladder=Qtrain, config=config, verification_engine=verification_engine, reward_funcs=reward_funcs, **kwargs)
+    ladder_tuned_model = ladder.finetune(save_locally=True) 
+
+    if use_ttrl:
+        # TODO:: complete 
+        ttrl = TTRL(target_llm=ladder_tuned_model) # should that be path to the model 
+        final_model = ttrl.finetune(save_locally=True)
+        return final_model
+
+    return ladder_tuned_model
+    

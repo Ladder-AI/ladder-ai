@@ -1,24 +1,26 @@
-from pydantic import BaseModel, Field
-from ladder.engines import LM
+from ladder.llms import BaseLM, OpenAIModel
 from typing_extensions import Annotated, Doc 
 from transformers import TrainingArguments
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional
 
 
 class LadderConfig(BaseModel,TrainingArguments):
-    inference_base_llm: Annotated[
-        Optional[ str],
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    instructor_llm: Annotated[
+        Optional[ BaseLM],
         Doc(
             """Base LLM to be used for general inference like dataset generation, default is openai/gpt-3.5-turbo"""
         ),
-    ] = "openai/gpt-3.5-turbo"
+    ] = OpenAIModel("gpt-3.5-turbo")
 
-    finetune_base_llm : Annotated[
-        str,
+    target_finetune_llm : Annotated[
+        Optional[str | BaseLM],
         Doc(
             """Base LLM to be used for finetuning, hf compatible models"""
         ),
-    ] 
+    ] = None # TODO:: this shouldnt be optional 
     force_regenerate: Optional[bool] = Field(
         default=False,
         description="If True, regenerate dataset even if it exists."

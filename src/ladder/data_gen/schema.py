@@ -114,6 +114,16 @@ class Dataset(BaseModel):
         with open(json_path, "r") as f:
             data = json.load(f)
         return Dataset.model_validate(data)
+    
+
+    def log(self):
+        # logger.warning(self.model_dump())
+        logger.debug(f"""
+        problems: {self.problems}
+        Description: {self.description}
+        Model Intelligence Ratio: {self.model_intelligence_ratio}
+        Metadata: {self.metadata}
+        """)
    
     def to_json(self, export_path:str) -> None:
         """ export dataset to json """
@@ -127,7 +137,7 @@ class Dataset(BaseModel):
         logger.success(f"Dataset exported successfully at {export_path}")
     
     @staticmethod
-    def load_dataset(path: str, name: Optional[str] = None, split: Optional[str] = None, **kwargs) -> "Dataset":
+    def load_hf_dataset(path: str, name: Optional[str] = None, split: Optional[str] = None, **kwargs) -> "Dataset":
         """
         Load a dataset compatible with the Hugging Face `datasets` library.
 
@@ -143,43 +153,28 @@ class Dataset(BaseModel):
         # HF Datasets to Dataset
         from datasets import load_dataset as _load_dataset
         ds =  _load_dataset(path, name=name, split=split, **kwargs)
+        
         # TODO:: verify if it matches the Dataset schema 
         # TODO:: convert to the vladder format (check if it matches the Dataset schema)
-
     
-    def to_vladder(self):
+    def to_vladder(self) -> "VLadder":
         """ convert dataset to vladder format """
-        # Dataset to VLadder
-        # TODO:: recheck this design 
-        # vladder = VLadder()
-        # for problem in self.problems:
-        #     for sub_problem in problem.sub_problems:
-        #         if isinstance(sub_problem, tuple) or isinstance(sub_problem, list):
-        #             sub_problem = sub_problem[0]
-        #         item = VLADDERItem(
-        #             prompt=sub_problem.sub_question,
-        #             completion=sub_problem.sub_answer,
-        #             reward=1,
-        #             original_question=problem.question,
-        #             difficulty_level=problem.difficulty_level,
-        #             transformations_applied=sub_problem.transformations_applid
-        #         )
-        #         vladder.items.append(item)
-
+        # self.log()
         vladder = VLadder()
         for problem in self.problems:
             for sub_problem in problem.sub_problems:
                 if isinstance(sub_problem, tuple) or isinstance(sub_problem, list):
                     sub_problem = sub_problem[0]
                 item = VLADDERItem(
-                    prompt=sub_problem.question,
-                    completion=sub_problem.answer,
+                    prompt=sub_problem.sub_question,
+                    completion=sub_problem.sub_answer,
                     reward=1,
                     original_question=problem.question,
                     difficulty_level=problem.difficulty_level,
-                    transformations_applied= [] # sub_problem.transformations_applid
+                    transformations_applied=sub_problem.transformations_applid
                 )
                 vladder.items.append(item)
+
         return vladder
 
 
