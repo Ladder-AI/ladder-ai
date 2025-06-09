@@ -1,0 +1,24 @@
+[project]
+name = "ladder-ai"
+version = "0.1.6"
+description = "Ladder + TTFT LLM Finetuning"
+authors = [
+    {name = "abdelrahman abounida", email = "abdelrahmanaboneda@gmail.com"},
+]
+dependencies = ["typing-extensions>=4.13.2", "loguru>=0.7.3", "pydantic>=2.11.3", "dspy>=2.6.5", "python-dotenv>=1.1.0", "pandas>=2.2.3"]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
+
+[dependency-groups]
+test = [
+    "pytest>=8.3.5",
+]
