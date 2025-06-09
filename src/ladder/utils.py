@@ -53,8 +53,6 @@ def load_json(json_path:str):
     with open(json_path, 'r') as f:
         return json.load(f)
 
-
-
 def run_local_hf_model():
     pass 
 
