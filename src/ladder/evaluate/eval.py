@@ -1,5 +1,5 @@
-from ladder import VLadder, VerificationEngine, LLMEngine
-from ladder.schema import Problem
+from ladder.engines import VerificationEngine , LLMEngine
+from ladder.schema import Problem, VLadder
 from ladder.llms import BaseLM
 from ladder.utils import get_device, generate_hf_model_answer, load_hf_model
 from typing import Optional, Union, Literal
@@ -96,7 +96,12 @@ def _evaluate_model(model: Union[PreTrainedModel, BaseLM],
             device = get_device()
             model.to(device)
             for item in q_test.items:
-                answer = generate_hf_model_answer(model,tokenizer, item.prompt, device)
+                answer = generate_hf_model_answer(
+                    model=model,
+                    question=item.prompt,
+                    tokenizer=tokenizer,
+                    device=device
+                )
                 score = verifier.compare_answers(
                     main_question=item.prompt,
                     original_answer=item.completion,
