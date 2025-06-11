@@ -28,8 +28,8 @@ class EvaluationResults(BaseModel):
 
 def evaluate_llm(
     q_test: VLadder,
+    base_model: BaseLM,
     tuned_model: Optional[Union[PreTrainedModel, str]] = None,
-    base_model: Optional[BaseLM] = None,
     *args,
     **kwargs
 ) -> EvaluationResults:
@@ -41,10 +41,14 @@ def evaluate_llm(
 
     results = EvaluationResults()
 
+    verification_engine = VerificationEngine(
+        llm_engine=LLMEngine(lm=base_model),
+    )
+
     # Evaluate base model (Before tuning)
     if base_model:
         logger.warning("Evaluating base model...")
-        results.base_model = _evaluate_model(base_model, q_test, "base")
+        results.base_model = _evaluate_model(base_model, q_test, "base", verification_engine=verification_engine)
         logger.success(f"""Base model \n
                                 1. accuracy: {results.base_model.accuracy} \n
                                 2. avg_score: {results.base_model.avg_score} \n
@@ -55,7 +59,7 @@ def evaluate_llm(
 
     # Load models
     tuned_model = load_hf_model(tuned_model)
-    results.tuned_model = _evaluate_model(tuned_model, q_test, "tuned")
+    results.tuned_model = _evaluate_model(tuned_model, q_test, "tuned", verification_engine=verification_engine)
 
     logger.success(f"""Tuned model \n
                             1. accuracy: {results.tuned_model.accuracy} \n
@@ -67,8 +71,10 @@ def evaluate_llm(
 
 # Internal Evaluation Helper
 def _evaluate_model(model: Union[PreTrainedModel, BaseLM], 
+                    verification_engine: VerificationEngine ,
                     q_test: VLadder,
-                    model_type: Literal["base", "tuned"]) -> EvaluationScore:
+                    model_type: Literal["base", "tuned"],
+                    ) -> EvaluationScore:
     
     q_test.items = q_test.items[0:2]
     logger.debug(f"Starting Evaluation over {len(q_test.items)} problems...")
@@ -81,7 +87,8 @@ def _evaluate_model(model: Union[PreTrainedModel, BaseLM],
         logger.error("You must provide a base model (as object or path).")
         sys.exit(1)
 
-    verifier = VerificationEngine(llm_engine=LLMEngine(lm=model))
+    # verifier = VerificationEngine(llm_engine=LLMEngine(lm=model)) # this model shoulddnt be smaller one 
+    verifier = verification_engine
     all_scores = []
     correct = 0
 
