@@ -9,15 +9,15 @@ except ImportError:
     logger.error("trl is not installed. Please install trl using `pip install trl transformers`")
     raise ImportError("trl is not installed. Please install trl using `pip install trl transformers`")
 
-def _prepare_grpo_config(self,grpo_config: Optional[GRPOConfig],_config: LadderConfig) -> GRPOConfig:
+def _prepare_grpo_config(grpo_config: Optional[GRPOConfig],config: LadderConfig) -> GRPOConfig:
     """Prepare GRPO Configuration for training"""
     return grpo_config or GRPOConfig(
-        learning_rate=_config.learning_rate,
-        num_train_epochs=_config.num_train_epochs,
-        per_device_train_batch_size=_config.train_batch_size,
-        max_steps=_config.max_steps,
-        gradient_accumulation_steps=_config.gradient_accumulation_steps,
-        push_to_hub=_config.push_to_hub
+        learning_rate=config.learning_rate,
+        num_train_epochs=config.num_train_epochs,
+        per_device_train_batch_size=config.train_batch_size,
+        max_steps=config.max_steps,
+        gradient_accumulation_steps=config.gradient_accumulation_steps,
+        push_to_hub=config.push_to_hub
     )
 
 def grpo(vladder:VLadder, 
@@ -26,7 +26,7 @@ def grpo(vladder:VLadder,
          grpo_config:Optional[GRPOConfig]=None, 
          reward_funcs:list[Callable] = []) -> PreTrainedModel:
     
-    grpo_config = _prepare_grpo_config(config,grpo_config)
+    grpo_config = _prepare_grpo_config(grpo_config=grpo_config,config=config)
     # Convert VLADDER dataset to Hugging Face Dataset format
     vladder = vladder.to_hf_dataset()
 
