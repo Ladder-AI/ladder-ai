@@ -48,7 +48,7 @@ def evaluate_llm(
     # Evaluate base model (Before tuning)
     if base_model:
         logger.warning("Evaluating base model...")
-        results.base_model = _evaluate_model(base_model, q_test, "base", verification_engine=verification_engine)
+        results.base_model = _evaluate_model(base_model, verification_engine,q_test, "base")
         logger.success(f"""Base model \n
                                 1. accuracy: {results.base_model.accuracy} \n
                                 2. avg_score: {results.base_model.avg_score} \n
@@ -59,7 +59,7 @@ def evaluate_llm(
 
     # Load models
     tuned_model = load_hf_model(tuned_model)
-    results.tuned_model = _evaluate_model(tuned_model, q_test, "tuned", verification_engine=verification_engine)
+    results.tuned_model = _evaluate_model(tuned_model,verification_engine, q_test, "tuned",)
 
     logger.success(f"""Tuned model \n
                             1. accuracy: {results.tuned_model.accuracy} \n
