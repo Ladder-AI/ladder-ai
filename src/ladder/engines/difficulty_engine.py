@@ -81,7 +81,7 @@ class DifficultyEngine(dspy.Module):
             - problem: Harder / Easier generated problem 
             - transformations: List of transformation(s) used to change the problem difficulty            
         """
-        out = self.difficulty_adapter(problem=problem,model_intelligence_ratio=model_intelligence_ratio, increase_difficulty=increase_difficulty)
+        out = self.problem_difficulty_adapter(problem=problem,model_intelligence_ratio=model_intelligence_ratio, increase_difficulty=increase_difficulty)
         return out.out_problem, out.transformations # TODO:: check schema 
         
         # TODO:: add anthor version for subproblem too 

@@ -86,7 +86,7 @@ class DeepSeekModel(BaseLM):
         **kwargs,
     ):
         _check_api(api_key, "DEEPSEEK_API_KEY")
-        super().__init__(model=model, api_key=api_key or os.environ.get("DEEPSEEK_API_KEY"), api_base=api_base, **kwargs)
+        super().__init__(model=f"deepseek/{model}", api_key=api_key or os.environ.get("DEEPSEEK_API_KEY"), api_base=api_base, **kwargs)
 
 class AzureOpenAIModel(BaseLM):
     """A wrapper class of Azure OpenAI endpoint.
@@ -147,6 +147,31 @@ class OllamaModel(BaseLM):
                          provider="ollama",
                          stream=stream,
                          **kwargs)
+
+class TogetherAIModel(BaseLM):
+    """A wrapper class for together ai """
+
+    def __init__(self, 
+                 model: str, 
+                 api_key: str=None,  
+                 base_url: Optional[str] = None,  
+                 stream:bool=False,
+                 **kwargs):
+        """
+        Together client wrapper for DSPy
+        
+        Args:
+            model: Model name
+            base_url: API base URL  
+            api_key: API key 
+            **kwargs: Additional completion arguments
+        """
+        super().__init__(model=f"together_ai/togethercomputer/{model}", 
+                         api_key=api_key, 
+                         base_url=base_url or "https://api.together.xyz/v1",
+                         stream=stream,
+                         **kwargs)
+
 
 def _check_api(api_key:str, api_env_name:str):
     if not api_key and not os.environ.get(api_env_name):
