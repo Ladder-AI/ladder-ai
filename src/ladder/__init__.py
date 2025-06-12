@@ -5,7 +5,7 @@ from ladder.data_gen.generator import create_dataset_generator
 from ladder.finetuning import Ladder, TTRL
 from ladder.config import LadderConfig
 from dotenv import load_dotenv
-from typing import Callable, Optional
+from typing import Callable, Optional, Literal
 from loguru import logger
 import dspy 
 import os 
@@ -46,6 +46,7 @@ def finetune_model(*,
                    config: LadderConfig,
                    reward_funcs: list[Callable] = [],
                    verification_engine: Optional[VerificationEngine] = None,
+                   algorithm: Literal["ladder", "ladder+ttrl"] = "ladder", # TODO:: add more algorithms 
                    **kwargs
                    ):
     Qtrain, Qtest = vladder_dataset.split(0.8)

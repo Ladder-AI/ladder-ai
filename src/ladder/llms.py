@@ -166,7 +166,7 @@ class TogetherAIModel(BaseLM):
             api_key: API key 
             **kwargs: Additional completion arguments
         """
-        super().__init__(model=f"together_ai/togethercomputer/{model}", 
+        super().__init__(model=f"together_ai/{model}", 
                          api_key=api_key, 
                          base_url=base_url or "https://api.together.xyz/v1",
                          stream=stream,

@@ -54,7 +54,6 @@ class Ladder:
         # Load tokenizer, configs and model
         self.grpo_config = grpo_config
 
-        logger.warning(f"HF_TOKEN: {os.environ.get('HF_TOKEN')}")
         self.tokenizer = AutoTokenizer.from_pretrained(self.base_llm)
         self.model: PreTrainedModel = AutoModelForCausalLM.from_pretrained(self.base_llm)
     

@@ -20,6 +20,7 @@ def _prepare_grpo_config(grpo_config: Optional[GRPOConfig],config: LadderConfig)
         push_to_hub=config.push_to_hub
     )
 
+# TODO::: check optimizations and parallel training 
 def grpo(vladder:VLadder, 
          model:PreTrainedModel, 
          config:LadderConfig,
