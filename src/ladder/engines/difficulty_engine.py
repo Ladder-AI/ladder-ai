@@ -5,56 +5,91 @@ from typing import Optional
 import dspy 
 
 class _ProblemDifficultyAdapter(dspy.Signature):
-    """ utils to make the problem harder or easier 
-        according to 
-        - increase_difficulty (will decide either to increase or decrease difficulty)
-        - model_intelligence_ratio if given will decide how much the problem should be changed
     """
-    problem: Problem  = dspy.InputField(prefix="problem: ", 
-                                       format=Problem , 
-                                       description="Problem to be made harder")
-    
-    increase_difficulty: bool = dspy.InputField(prefix="increase_difficulty: ", 
-                                                format=bool, 
-                                                description="Whether to increase difficulty or not")
-    
-    model_intelligence_ratio: Optional[float] = dspy.InputField(prefix="model_intelligence_ratio: ", 
-                                                               format=int, 
-                                                               description="decide what difficulty level the model can solve")
+    You are a problem difficulty adaptation expert specializing in modifying educational problems for controlled model training.
 
-    out_problem: Problem = dspy.OutputField(prefix="harder_problem: ", 
-                                               format=Problem, 
-                                               description="Harder Problem")
+    Adjust the difficulty of a given problem by applying targeted transformations.
     
-    # TODO:: this should be input ?? 
-    transformations: list[Transformation] = dspy.OutputField(prefix="transformations: ", 
-                                                  format=list[Transformation], 
-                                                  description="List of transformation(s) used to change the problem difficulty")
+    Behavior is determined by:
+    - `increase_difficulty`: If True, the problem should be made harder; if False, easier.
+    - `model_intelligence_ratio`: Optional float (0.0–1.0) indicating the capability of the model; used to calibrate transformation intensity.
 
+    The given transformations is just example but you can adjust the problem as needed 
+    example for math problem , you can increase the equation degrees, complexity or make it simpler,harder and so on for any other domains .. .
+    Return the updated problem and the list of transformations used.
+    """
+
+    problem: Problem = dspy.InputField(
+        prefix="Problem: ",
+        format=Problem,
+        description="Problem to be modified (harder or easier)"
+    )
+
+    increase_difficulty: bool = dspy.InputField(
+        prefix="Increase Difficulty: ",
+        format=bool,
+        description="True to increase difficulty, False to decrease it"
+    )
+
+    model_intelligence_ratio: Optional[float] = dspy.InputField(
+        prefix="Model Intelligence Ratio: ",
+        format=float,
+        description="Optional difficulty calibration value (0.0–1.0) representing model capability"
+    )
+
+    out_problem: Problem = dspy.OutputField(
+        prefix="Modified Problem: ",
+        format=Problem,
+        description="Resulting problem after difficulty adjustment"
+    )
+
+    transformations: list[Transformation] = dspy.OutputField(
+        prefix="Applied Transformations: ",
+        format=list[Transformation],
+        description="List of transformations used to adjust the problem’s difficulty"
+    )
 
 class _SubProblemDifficultyAdapter(dspy.Signature):
-    """ This Engine will be used to change the problem difficulty, estimate the difficulty levels 
     """
-    subproblem: SubProblem  = dspy.InputField(prefix="subproblem: ", 
-                                       format=SubProblem , 
-                                       description="SubProblem to be made harder")
-    
-    increase_difficulty: bool = dspy.InputField(prefix="increase_difficulty: ", 
-                                                format=bool, 
-                                                description="Whether to increase difficulty or not")
-    
-    model_intelligence_ratio: Optional[float] = dspy.InputField(prefix="model_intelligence_ratio: ", 
-                                                               format=int, 
-                                                               description="decide what difficulty level the model can solve")
+    You are a problem difficulty adaptation expert specializing in fine-grained control of problem difficulty.
 
-    out_subproblem: SubProblem = dspy.OutputField(prefix="harder_subproblem: ", 
-                                               format=SubProblem, 
-                                               description="Harder SubProblem")
-    
-    # TODO:: this should be input ?? 
-    transformations: list[Transformation] = dspy.OutputField(prefix="transformations: ", 
-                                                  format=list[Transformation], 
-                                                  description="List of transformation(s) used to change the subproblem difficulty")
+    Modify a problem's difficulty using targeted transformations based on:
+    - `increase_difficulty`: Direction of difficulty adjustment.
+    - `model_intelligence_ratio`: Optional float (0.0–1.0) to guide the degree of change.
+
+    Return the updated problem (mainly new question adjusted to make it easier or harder) and the list of applied transformations.
+    """
+
+    problem: SubProblem = dspy.InputField(
+        prefix="problem: ",
+        format=SubProblem,
+        description="problem to be modified (harder or easier)"
+    )
+
+    increase_difficulty: bool = dspy.InputField(
+        prefix="Increase Difficulty: ",
+        format=bool,
+        description="True to increase difficulty, False to decrease it"
+    )
+
+    model_intelligence_ratio: Optional[float] = dspy.InputField(
+        prefix="Model Intelligence Ratio: ",
+        format=float,
+        description="Optional calibration value (0.0–1.0) representing model’s ability to solve the problem"
+    )
+
+    out_subproblem: SubProblem = dspy.OutputField(
+        prefix="Modified problem: ",
+        format=SubProblem,
+        description="Resulting problem after difficulty adjustment"
+    )
+
+    transformations: list[Transformation] = dspy.OutputField(
+        prefix="Applied Transformations: ",
+        format=list[Transformation],
+        description="List of transformations used to modify the problem’s difficulty"
+    )
+
 
 class DifficultyEngine(dspy.Module):
     """ This Engine will be used to change the problem difficulty, estimate the difficulty levels 
@@ -96,5 +131,5 @@ class DifficultyEngine(dspy.Module):
             - subproblem: Harder / Easier generated subproblem 
             - transformations: List of transformation(s) used to change the subproblem difficulty            
         """
-        out = self.subproblem_difficulty_adapter(subproblem=subproblem,model_intelligence_ratio=model_intelligence_ratio, increase_difficulty=increase_difficulty)
+        out = self.subproblem_difficulty_adapter(problem=subproblem,model_intelligence_ratio=model_intelligence_ratio, increase_difficulty=increase_difficulty)
         return out.out_subproblem, out.transformations

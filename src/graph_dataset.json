@@ -1,0 +1,1772 @@
+{
+  "problems": [
+    {
+      "question": "Find the point on the line defined by the equation y = -0.5x + 4 that is closest to the point (8, 2). Provide the coordinates of this nearest point as a tuple (x, y) without any additional explanation or commentary.",
+      "correct_answer": [7.200000000000001, 0.39999999999999947],
+      "small_llm_answer": [4.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the point (8, 2).",
+          "correct_answer": [7.2, 0.4],
+          "small_llm_answer": [8.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin.",
+          "correct_answer": [4, 0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin. Determine the coordinates of the point.",
+          "correct_answer": [4, 0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.6,
+      "is_solvable": false
+    },
+    {
+      "question": "Find the point on the line defined by the equation y = -0.5x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y) without any additional explanation or commentary.",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [0.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.4,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line defined by the equation y = -0.5x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [8.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin. Provide the coordinates of this nearest point.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.3,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line defined by the equation y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.2,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the x-axis.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.1,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point? Hint: To find the point on a line closest to the origin, you need to find the perpendicular line from the origin to the given line and determine the intersection point.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.05,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point? Hint: To find the point on a line closest to the origin, you need to find the perpendicular line from the origin to the given line and determine the intersection point.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.02,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the y-axis.",
+      "correct_answer": [0.0, 4.0],
+      "small_llm_answer": [0.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.0,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+      "correct_answer": [2.0, 2.0],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the x-axis.",
+          "correct_answer": [2.0, 0.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 0.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the x-axis.",
+          "correct_answer": [2.0, 0.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.0,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the origin. Determine the coordinates of the point.",
+      "correct_answer": [2.0, 2.0],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.0,
+      "is_solvable": true
+    },
+    {
+      "question": "Determine the point on the line y = -0.5x + 4 that is nearest to the point (8, 2). Give the coordinates of this closest point as a tuple (x, y).",
+      "correct_answer": [7.200000000000001, 0.39999999999999947],
+      "small_llm_answer": [8.0, 2.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the point (8, 2). Provide the coordinates of this point as a tuple (x, y).",
+          "correct_answer": [7.2, 0.4],
+          "small_llm_answer": [8.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the point (8, 2). Provide the coordinates of this point as a tuple (x, y).",
+          "correct_answer": [7.2, 0.4],
+          "small_llm_answer": [8.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin. Provide the coordinates of this point as a tuple (x, y).",
+          "correct_answer": [0, 4],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.6,
+      "is_solvable": false
+    },
+    {
+      "question": "Solve the system of equations to find the point of intersection between the lines y = -0.5x + 4 and 2x + y = 10. Provide the coordinates of this point as a tuple (x, y).",
+      "correct_answer": [6.0, -1.0],
+      "small_llm_answer": [6.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the y-intercept of the line represented by the equation y = -0.5x + 4.",
+          "correct_answer": 4.0,
+          "small_llm_answer": "The y-intercept is 4.",
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": true
+        },
+        {
+          "question": "What is the y-intercept of the line y = -0.5x + 4?",
+          "correct_answer": 4.0,
+          "small_llm_answer": "The y-intercept is 4.",
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "What is the y-intercept of the line y = -2x + 6?",
+          "correct_answer": 6.0,
+          "small_llm_answer": "The y-intercept is 6.",
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.8,
+      "is_solvable": false
+    },
+    {
+      "question": "Given the line represented by the equation 2y - 4x = 8, determine the point on this line closest to the point (5, 3). Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [4.0, 2.0],
+      "small_llm_answer": [5.0, 3.0],
+      "sub_problems": [
+        {
+          "question": "Given the line represented by the equation 2y - 4x = 8, determine the y-intercept of this line.",
+          "correct_answer": 2.0,
+          "small_llm_answer": "To find the y-intercept, we need to rewrite the equation in slope-intercept form (y = mx + b), where m is the slope and b is the y-intercept.\n\nThe y-intercept is 4.",
+          "transformations_applid": [],
+          "difficulty_level": 0.4,
+          "is_solvable": true
+        },
+        {
+          "question": "What is the y-intercept of the line 2y - 4x = 8?",
+          "correct_answer": 2.0,
+          "small_llm_answer": "To find the y-intercept, we need to rearrange the equation to isolate y. \n\nThe y-intercept is 4.",
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "What is the y-intercept of the line 2y - 4x = 8?",
+          "correct_answer": 2.0,
+          "small_llm_answer": "To find the y-intercept, we need to rearrange the equation to isolate y. \n\nThe y-intercept is 4.",
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.6,
+      "is_solvable": false
+    },
+    {
+      "question": "Convert the equation of the line from point-slope form y - 4 = -0.5(x - 8) to standard form Ax + By = C. Then, find the point on this line closest to the point (8, 2). Give the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [7.200000000000001, 0.39999999999999947],
+      "small_llm_answer": [8.0, 2.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -0.5x + 8 closest to the point (8, 2). Give the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [7.2, 0.4],
+          "small_llm_answer": [8.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 8 closest to the point (0, 0). Give the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [0.0, 8.0],
+          "small_llm_answer": [0.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 8 closest to the point (0, 0). What are the coordinates of this point?",
+          "correct_answer": [0.0, 8.0],
+          "small_llm_answer": [0.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.6,
+      "is_solvable": false
+    },
+    {
+      "question": "Find the point on the line defined by the equation y = -0.5x + 4 that is closest to the point (7.5, 1.5). Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [7.0, 3.5],
+      "small_llm_answer": [7.5, 1.5],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the point (8, 2). Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [8.0, 3.0],
+          "small_llm_answer": [8.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the point (8, 2). What are the coordinates of this nearest point?",
+          "correct_answer": [8.0, 3.0],
+          "small_llm_answer": [8.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the point (8, 2). What are the coordinates of this nearest point?",
+          "correct_answer": [8.0, 3.0],
+          "small_llm_answer": [8.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.7,
+      "is_solvable": false
+    },
+    {
+      "question": "Find the point on the line defined by the equation y = -0.5x + 4 in point-slope form that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y) without any additional explanation or commentary.",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [-8.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line defined by the equation y = -0.5x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin. Provide the coordinates of this nearest point.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.6,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line defined by the equation 2y + x = 8 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y) without any additional explanation or commentary.",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [-8.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line 2y + x = 8 closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [0.0, 4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line 2y + x = 8 closest to the origin. Consider using the distance formula to calculate the distance between a point and the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": "To find the point on the line 2y + x = 8 closest to the origin, we can use the distance formula. \n\nThe distance formula is d = \u221a(x\u00b2 + y\u00b2). \n\nWe can express y in terms of x from the line equation: y = (8 - x) / 2.\n\nSubstituting y in the distance formula, we get d = \u221a(x\u00b2 + ((8 - x) / 2)\u00b2).\n\nTo minimize the distance, we take the derivative of d with respect to x and set it to 0.\n\nThe derivative of d is d' = (x / \u221a(x\u00b2 + ((8 - x) / 2)\u00b2)) + ((8 - x) / 2) / \u221a(x\u00b2 + ((8 - x) / 2)\u00b2) * (-1/2).\n\nSimplifying and solving for x, we get x = 16/5.\n\nSubstituting x in the line equation, we get y = (8 - 16/5) / 2 = 6/5.\n\nThe point on the line closest to the origin is (16/5, 6/5).",
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line 2y + x = 8 closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [0.0, 4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.4,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line defined by the equation y = -0.5x + 4 that is closest to the origin. Solve the system of equations to find the coordinates of this nearest point. Provide the coordinates as a tuple (x, y) without any additional explanation or commentary.",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [0.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin. Provide the coordinates of this point.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin. Provide the coordinates of this point.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.4,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this point.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.8,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line defined by the equation y = -0.5x that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y) without any additional explanation or commentary.",
+      "correct_answer": [0.0, 0.0],
+      "small_llm_answer": [0.0, 0.0],
+      "sub_problems": [],
+      "difficulty_level": 0.4,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line defined by the equation y = -0.5x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [8.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin. Provide the coordinates of this nearest point.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.3,
+      "is_solvable": true
+    },
+    {
+      "question": "Simplify the equation of the line y = -0.5x + 4. Find the point on this line that is closest to the origin. Give the coordinates of this point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [3.2, 2.4],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin. Provide the coordinates of this point.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.1,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.4,
+      "is_solvable": true
+    },
+    {
+      "question": "Given the line equation y = -0.5x + 4, determine the point on this line closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": "To find the point on the line closest to the origin, we need to find the point where the line intersects the line perpendicular to it through the origin. \n\nThe slope of the given line is -0.5. The slope of a line perpendicular to it is 2. \n\nThe equation of the line through the origin with slope 2 is y = 2x.\n\nSetting the two equations equal to each other, we get:\n-0.5x + 4 = 2x\n4 = 3.5x\nx = 4 / 3.5\nx = 8/7\n\nNow substitute x into the original equation to find y:\ny = -0.5(8/7) + 4\ny = -4/7 + 28/7\ny = 24/7\n\nThe point on the line closest to the origin is (8/7, 24/7).",
+      "sub_problems": [
+        {
+          "question": "Given the line equation y = -0.5x + 4, find the y-intercept of this line.",
+          "correct_answer": 4.0,
+          "small_llm_answer": "The y-intercept is 4.",
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "What is the y-intercept of the line y = -0.5x + 4?",
+          "correct_answer": 4.0,
+          "small_llm_answer": "The y-intercept is 4.",
+          "transformations_applid": [],
+          "difficulty_level": 0.1,
+          "is_solvable": true
+        },
+        {
+          "question": "What is the y-intercept of the line y = -2x + 6?",
+          "correct_answer": 6.0,
+          "small_llm_answer": "The y-intercept is 6.",
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.3,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -0.5x + 4 that is nearest to the origin. Give the coordinates of this closest point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [8.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is nearest to the x-axis. Give the coordinates of this closest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is nearest to the x-axis. Give the coordinates of this closest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is nearest to the x-axis. Give the coordinates of this closest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.3,
+      "is_solvable": true
+    },
+    {
+      "question": "Determine the point on the line y = -0.5x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [8.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -0.5x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [8.0, -4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.3,
+      "is_solvable": true
+    },
+    {
+      "question": "Simplify the linear equation by using integers only. Find the point on the line defined by the equation y = -1x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [2.0, 2.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the point (1, 1). Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.5, 3.5],
+          "small_llm_answer": [1.0, 1.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the point (2, 2). Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.5, 3.5],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.5,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line defined by the equation y = -x + 4 that is closest to the y-axis. Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [0.0, 4.0],
+      "small_llm_answer": [0.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that intersects the y-axis. Provide the coordinates of this point as a tuple (x, y).",
+          "correct_answer": [0.0, 4.0],
+          "small_llm_answer": [0.0, 4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "What are the coordinates of the point where the line y = -x + 4 intersects the y-axis?",
+          "correct_answer": [0.0, 4.0],
+          "small_llm_answer": [0.0, 4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.1,
+          "is_solvable": true
+        },
+        {
+          "question": "What is the y-intercept of the line y = -x + 4?",
+          "correct_answer": [0.0, 4.0],
+          "small_llm_answer": "The y-intercept is 4.",
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.4,
+      "is_solvable": true
+    },
+    {
+      "question": "Provide a hint on how to calculate the distance between a point and a line. Find the point on the line defined by the equation y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [2.0, 6.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.1,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.4,
+      "is_solvable": true
+    },
+    {
+      "question": "Changed the point to find the closest point to the origin instead of a specific point. Find the point on the line defined by the equation y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [2.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point? Hint: To find the point on a line closest to the origin, you need to find the perpendicular line from the origin to the given line and determine the intersection point.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.5,
+      "is_solvable": true
+    },
+    {
+      "question": "Provide the equation of a line in a different form (e.g., point-slope form) and require converting it to standard form before finding the nearest point. Find the point on the line defined by the equation y + x = 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [2.0, 2.0],
+      "sub_problems": [
+        {
+          "question": "Provide the equation of a line in a different form (e.g., point-slope form) and require converting it to standard form before finding the nearest point. Find the point on the line defined by the equation y + x = 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.7,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line defined by the equation y + x = 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [0.0, 4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.5,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y + x = 4 that is closest to the origin. Provide the coordinates of this nearest point.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.8,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y). Solve for both x and y.",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": "The point on the line y = -x + 4 closest to the origin is (4/5, 4/5).",
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.4,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.8,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y). Simplify the coordinates to integers.",
+      "correct_answer": [2, 4],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2, 4],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2, 4],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2, 4],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.4,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y). Add noise to the coordinates and slope.",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [2.0, 2.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y). Add noise to the coordinates and slope. Additionally, determine the distance from the origin to this point. Consider the line y = -x + 4 + 2.5.",
+          "correct_answer": [1.75, 5.25, 5.59],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y). Additionally, determine the distance from the origin to this point. Consider the line y = -x + 4.",
+          "correct_answer": [2, 2, 2.83],
+          "small_llm_answer": "The point on the line y = -x + 4 closest to the origin is (4/5, 4/5). \n\nThe distance from the origin to this point is 4/sqrt(2) or approximately 2.828.",
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.8,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the origin. The line is given in point-slope form. Convert it to standard form before finding the nearest point. Provide the coordinates of this nearest point as a tuple (x, y).",
+      "correct_answer": [2.0, 4.0],
+      "small_llm_answer": [0.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. The line is given in point-slope form. Convert it to standard form before finding the nearest point. Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [0.0, 4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Provide the coordinates of this nearest point as a tuple (x, y).",
+          "correct_answer": [2.0, 4.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.1,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.7,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the origin. The coordinates of the point and the slope of the line have been slightly perturbed.",
+      "correct_answer": [2.1, 3.9],
+      "small_llm_answer": [1.0, 3.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.1, 3.9],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Calculate the coordinates of the point.",
+          "correct_answer": [2.1, 3.9],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Calculate the coordinates of the point.",
+          "correct_answer": [2.1, 3.9],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.7,
+      "is_solvable": true
+    },
+    {
+      "question": "Convert the equation of the line y = 2x - 3 from point-slope form to standard form and then find the point on the line closest to the origin.",
+      "correct_answer": [1.2, 2.4],
+      "small_llm_answer": "To convert the equation to standard form, we need the equation in point-slope form first. However, the given equation is already in slope-intercept form (y = mx + b), which is a specific type of slope-intercept form. \n\nThe equation is already in standard form (y = 2x - 3). \n\nTo find the point on the line closest to the origin, we need the slope and y-intercept. The slope is 2 and the y-intercept is -3. \n\nThe point on the line closest to the origin will be on the line perpendicular to the given line that passes through the origin. The slope of this line is -1/2. \n\nUsing the point-slope form, y - 0 = (-1/2)(x - 0), we get y = (-1/2)x. \n\nNow, we need to find the intersection point of y = 2x - 3 and y = (-1/2)x. \n\nSetting the two equations equal to each other, we get 2x - 3 = (-1/2)x. \n\nSolving for x, we get (5/2)x = 3, x = 6/5. \n\nSubstituting x into one of the equations, we get y = 2(6/5) - 3 = -9/5. \n\nThe point on the line closest to the origin is (6/5, -9/5).",
+      "sub_problems": [
+        {
+          "question": "Convert the equation of the line y = 2x - 3 from point-slope form to standard form.",
+          "correct_answer": "y - 2x = -3",
+          "small_llm_answer": "The equation y = 2x - 3 is already in standard form (Ax + By = C), where A = 2, B = -1, and C = -3.",
+          "transformations_applid": [],
+          "difficulty_level": 0.4,
+          "is_solvable": true
+        },
+        {
+          "question": "What is the equation of the line y = 2x - 3 in point-slope form?",
+          "correct_answer": "y - 2x = -3",
+          "small_llm_answer": "The equation of the line y = 2x - 3 in point-slope form is y - (-3) = 2(x - 0).",
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "What is the slope of the line y = 2x - 3?",
+          "correct_answer": "2",
+          "small_llm_answer": "The slope of the line y = 2x - 3 is 2.",
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.6,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the origin, where the point of interest has been changed to the origin.",
+      "correct_answer": [0.0, 0.0],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Hint: The point on the line closest to the origin lies on the line perpendicular to y = -x + 4 passing through the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.2,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x that is closest to the origin.",
+      "correct_answer": [1.0, 1.0],
+      "small_llm_answer": [0.0, 0.0],
+      "sub_problems": [],
+      "difficulty_level": 0.1,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x that is closest to the origin.",
+      "correct_answer": [1.0, 1.0],
+      "small_llm_answer": [0.0, 0.0],
+      "sub_problems": [],
+      "difficulty_level": 0.1,
+      "is_solvable": true
+    },
+    {
+      "question": "Simplify the linear equation by using integers only: Find the point on the line y = -x + 4 that is closest to the origin.",
+      "correct_answer": [2, 4],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2, 4],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2, 4],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2, 4],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.3,
+      "is_solvable": true
+    },
+    {
+      "question": "Introduce a system of linear equations with two variables and require solving for both variables: Find the point on the line y = -x + 4 and x + y = 5 that is closest to the origin.",
+      "correct_answer": [2, 3],
+      "small_llm_answer": "To find the point on the line y = -x + 4 and x + y = 5 closest to the origin, we need to solve the system of linear equations.\n\nThe two equations are:\n1) y = -x + 4\n2) x + y = 5\n\nWe can substitute equation 1 into equation 2 to solve for x.\n\nLet's solve for x.",
+      "sub_problems": [
+        {
+          "question": "Introduce a system of linear equations with two variables and require solving for both variables: Find the point on the line y = -x + 4 and x + y = 5 that is closest to the origin.",
+          "correct_answer": [2, 3],
+          "small_llm_answer": "To find the point on the line y = -x + 4 and x + y = 5 closest to the origin, we need to solve the system of linear equations.\n\nThe two equations are:\n1) y = -x + 4\n2) x + y = 5\n\nWe can substitute equation 1 into equation 2 to solve for x.\n\nLet's solve for x.",
+          "transformations_applid": [],
+          "difficulty_level": 0.8,
+          "is_solvable": true
+        },
+        {
+          "question": "Introduce a system of linear equations with two variables and require solving for both variables: Find the point on the line y = -x + 4 and x + y = 5 that is closest to the origin.",
+          "correct_answer": [2, 3],
+          "small_llm_answer": "To find the point on the line y = -x + 4 and x + y = 5 closest to the origin, we need to solve the system of linear equations.\n\nThe two equations are:\n1) y = -x + 4\n2) x + y = 5\n\nWe can substitute equation 1 into equation 2 to solve for x.\n\nLet's solve for x.",
+          "transformations_applid": [],
+          "difficulty_level": 0.8,
+          "is_solvable": true
+        },
+        {
+          "question": "Introduce a system of linear equations with two variables and require solving for both variables: Find the point on the line y = -x + 4 and x + y = 5 that is closest to the origin.",
+          "correct_answer": [2, 3],
+          "small_llm_answer": "To find the point on the line y = -x + 4 and x + y = 5 closest to the origin, we need to solve the system of linear equations.\n\nThe two equations are:\n1) y = -x + 4\n2) x + y = 5\n\nWe can substitute equation 1 into equation 2 to solve for x.\n\nLet's solve for x.",
+          "transformations_applid": [],
+          "difficulty_level": 0.8,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.8,
+      "is_solvable": true
+    },
+    {
+      "question": "Provide the equation of a line in a different form and require converting it to standard form before finding the nearest point: Find the point on the line y - 4 = -(1/1)(x - 0) that is closest to the origin.",
+      "correct_answer": [2, 4],
+      "small_llm_answer": "To find the point on the line closest to the origin, we need to convert the equation to standard form first. \n\nThe given equation is y - 4 = -(1/1)(x - 0). \n\nConverting it to standard form, we get x + y - 4 = 0.",
+      "sub_problems": [
+        {
+          "question": "Find the point on the line x + y - 4 = 0 that is closest to the origin.",
+          "correct_answer": [2, 4],
+          "small_llm_answer": "The point on the line x + y - 4 = 0 closest to the origin is (4/\u221a2, 4/\u221a2).",
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line x + y = 4 that is closest to the origin.",
+          "correct_answer": [2, 2],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line x + y = 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2, 2],
+          "small_llm_answer": [1.0, 3.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.6,
+      "is_solvable": true
+    },
+    {
+      "question": "Changed the point to find the closest point to the origin instead of a specific point: Find the point on the line y = -x + 4 that is closest to the origin.",
+      "correct_answer": [2, 4],
+      "small_llm_answer": [2.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Changed the point to find the closest point to the origin instead of a specific point: Find the point on the line y = -x + 4 that is closest to the origin. What is the distance from this point to the origin?",
+          "correct_answer": 2.828,
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [
+            {
+              "description": "Added a follow-up question to calculate the distance from the point to the origin.",
+              "difficulty_level": 0.2
+            }
+          ],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Changed the point to find the closest point to the origin instead of a specific point: Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": 2.828,
+          "small_llm_answer": [2.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.1,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": 2.828,
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.05,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.3,
+      "is_solvable": true
+    },
+    {
+      "question": "Changed the point to find the closest point to the origin instead of a specific point: Find the point on the line y = -x + 4 that is closest to the origin.",
+      "correct_answer": [2, 4],
+      "small_llm_answer": [2.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Changed the point to find the closest point to the origin instead of a specific point: Find the point on the line y = -x + 4 that is closest to the origin. What is the distance from this point to the origin?",
+          "correct_answer": 2.828,
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [
+            {
+              "description": "Added a follow-up question to calculate the distance from the point to the origin.",
+              "difficulty_level": 0.2
+            }
+          ],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Changed the point to find the closest point to the origin instead of a specific point: Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": 2.828,
+          "small_llm_answer": [2.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.1,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": 2.828,
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.05,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.3,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the y-axis. Simplify the equation of the line.",
+      "correct_answer": [0.0, 4.0],
+      "small_llm_answer": [0.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Simplify the equation of the line.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.1,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the y-axis. Add noise to the coordinates of the given point and the slope of the line.",
+      "correct_answer": [0.0, 4.0],
+      "small_llm_answer": [0.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Hint: The point on the line closest to the origin lies on the line perpendicular to y = -x + 4 passing through the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.7,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the y-axis. Simplify the equation of the line by removing the coefficient in front of x.",
+      "correct_answer": [0.0, 4.0],
+      "small_llm_answer": [0.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the y-axis.",
+          "correct_answer": [0.0, 4.0],
+          "small_llm_answer": [0.0, 4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.05,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Hint: The point on the line closest to the origin lies on the line perpendicular to y = -x + 4 passing through the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.1,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the y-axis. Add noise to the coordinates of the given point and the slope of the line.",
+      "correct_answer": [0.0, 4.0],
+      "small_llm_answer": [0.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Hint: The point on the line closest to the origin lies on the line perpendicular to y = -x + 4 passing through the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.7,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the y-axis. Add noise to the coordinates of the given point and the slope of the line.",
+      "correct_answer": [0.0, 4.0],
+      "small_llm_answer": [0.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Hint: The point on the line closest to the origin lies on the line perpendicular to y = -x + 4 passing through the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.7,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+      "correct_answer": [2.0, 2.0],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the x-axis.",
+          "correct_answer": [2.0, 0.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 0.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the x-axis.",
+          "correct_answer": [2.0, 0.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.0,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x that is closest to the origin.",
+      "correct_answer": [1.0, 1.0],
+      "small_llm_answer": [0.0, 0.0],
+      "sub_problems": [],
+      "difficulty_level": 0.1,
+      "is_solvable": true
+    },
+    {
+      "question": "Convert the equation y = -x + 4 from point-slope form to standard form and then find the point on the line that is closest to the origin.",
+      "correct_answer": [2.0, 2.0],
+      "small_llm_answer": [0.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Convert the equation y = -x + 4 from point-slope form to slope-intercept form.",
+          "correct_answer": "y = -x + 4",
+          "small_llm_answer": "The equation y = -x + 4 is already in slope-intercept form (y = mx + b), where m = -1 and b = 4.",
+          "transformations_applid": [],
+          "difficulty_level": 0.4,
+          "is_solvable": true
+        },
+        {
+          "question": "What is the slope-intercept form of the equation y = -x + 4?",
+          "correct_answer": "y = -x + 4",
+          "small_llm_answer": "The slope-intercept form is y = mx + b, where m is the slope and b is the y-intercept. \n\nFor the given equation y = -x + 4, the slope-intercept form is y = -x + 4.",
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": true
+        },
+        {
+          "question": "What is the slope of the line y = -x + 4?",
+          "correct_answer": "-1",
+          "small_llm_answer": "The slope of the line y = -x + 4 is -1.",
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.6,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the point (1, 1).",
+      "correct_answer": [1.5, 2.5],
+      "small_llm_answer": [1.0, 1.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2, 2],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Hint: The point on the line closest to the origin lies on the line perpendicular to the given line passing through the origin.",
+          "correct_answer": [2, 2],
+          "small_llm_answer": [2.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2, 2],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.3,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is farthest from the origin.",
+      "correct_answer": [-2.0, -2.0],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. What are the coordinates of this point?",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.3,
+      "is_solvable": true
+    },
+    {
+      "question": "Solve the system of linear equations: y = -x + 4, 2x + y = 5. Find the coordinates of the point of intersection.",
+      "correct_answer": [1.0, 3.0],
+      "small_llm_answer": "To solve the system of linear equations, we can substitute y from the first equation into the second equation. \n\nThe solution is x = 1.5 and y = 2.5.",
+      "sub_problems": [
+        {
+          "question": "Solve the system of linear equations: y = -x + 4, 2x + y = 5. Find the coordinates of the point of intersection.",
+          "correct_answer": [1.0, 3.0],
+          "small_llm_answer": "To solve the system of linear equations, we can substitute y from the first equation into the second equation. \n\nThe solution is x = 1.5 and y = 2.5.",
+          "transformations_applid": [
+            {
+              "description": "Eliminate y from the second equation to find x directly.",
+              "difficulty_level": 0.6
+            }
+          ],
+          "difficulty_level": 0.6,
+          "is_solvable": true
+        },
+        {
+          "question": "Solve the system of linear equations: y = -x + 4, 2x + y = 5. Find the coordinates of the point of intersection.",
+          "correct_answer": [1.0, 3.0],
+          "small_llm_answer": "To solve the system of linear equations, we can substitute y from the first equation into the second equation. \n\nThe solution is x = 1.5 and y = 2.5.",
+          "transformations_applid": [],
+          "difficulty_level": 0.4,
+          "is_solvable": true
+        },
+        {
+          "question": "Solve the system of linear equations: y = -x + 4, 2x + y = 5. Find the coordinates of the point of intersection.",
+          "correct_answer": [1.0, 3.0],
+          "small_llm_answer": "To solve the system of linear equations, we can substitute y from the first equation into the second equation. \n\nThe solution is x = 1.5 and y = 2.5.",
+          "transformations_applid": [],
+          "difficulty_level": 0.3,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.8,
+      "is_solvable": true
+    },
+    {
+      "question": "Given the line y = -x + 4, determine the coordinates of the point where it intersects the x-axis.",
+      "correct_answer": [4.0, 0.0],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "What are the coordinates of the point where the line y = -x + 4 intersects the x-axis?",
+          "correct_answer": [4.0, 0.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "What are the coordinates of the point where the line y = -x + 4 intersects the x-axis?",
+          "correct_answer": [4.0, 0.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "What are the coordinates of the point where the line y = -x + 4 intersects the y-axis?",
+          "correct_answer": [0.0, 4.0],
+          "small_llm_answer": [0.0, 4.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.1,
+          "is_solvable": true
+        }
+      ],
+      "difficulty_level": 0.3,
+      "is_solvable": true
+    },
+    {
+      "question": "Find the point on the line y = -x + 4 that is closest to the y-axis. Determine the coordinates of the point.",
+      "correct_answer": [2.0, 2.0],
+      "small_llm_answer": [0.0, 4.0],
+      "sub_problems": [
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Determine the coordinates of the point.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": 0.2,
+          "is_solvable": true
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [4.0, 0.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the point on the line y = -x + 4 that is closest to the origin. Hint: The point on the line closest to the origin lies on the line perpendicular to y = -x + 4 passing through the origin.",
+          "correct_answer": [2.0, 2.0],
+          "small_llm_answer": [2.0, 2.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.0,
+      "is_solvable": true
+    },
+    {
+      "question": "Solve the system of linear equations: 3x + 2y = 6, 2x - y = 1. Find the coordinates of the point of intersection.",
+      "correct_answer": [1.0, 2.0],
+      "small_llm_answer": "To solve the system of linear equations, we can use the method of substitution or elimination. \n\nUsing elimination, multiply the second equation by 2 to get 4x - 2y = 2. Then add this to the first equation (3x + 2y = 6) to get 7x = 8. \n\nDivide by 7 to get x = 8/7. \n\nSubstitute x = 8/7 into the second equation (2x - y = 1) to get 2(8/7) - y = 1. \n\nSimplify to get 16/7 - y = 1. Multiply by 7 to get 16 - 7y = 7. \n\nSubtract 16 from both sides to get -7y = -9. \n\nDivide by -7 to get y = 9/7.\n\nThe coordinates of the point of intersection are (8/7, 9/7).",
+      "sub_problems": [
+        {
+          "question": "Solve the system of linear equations: 3x + 2y = 6, 2x - y = 1. Find the values of x and y.",
+          "correct_answer": [1.0, 2.0],
+          "small_llm_answer": "To solve the system of linear equations, we can use the method of substitution or elimination. \n\nUsing elimination, multiply the second equation by 2 to get 4x - 2y = 2. Then add this to the first equation (3x + 2y = 6) to get 7x = 8. \n\nDivide by 7 to get x = 8/7. \n\nSubstitute x = 8/7 into the second equation (2x - y = 1) to get 16/7 - y = 1. \n\nMultiply by 7 to get 16 - 7y = 7. \n\nSubtract 16 from both sides to get -7y = -9. \n\nDivide by -7 to get y = 9/7.\n\nSo, x = 8/7 and y = 9/7.",
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Solve the system of linear equations: x + y = 3, 2x - y = 4. Find the values of x and y.",
+          "correct_answer": [2.0, 1.0],
+          "small_llm_answer": "To solve the system of linear equations, we can use the method of substitution or elimination. \n\nThe solution is: \nx = 19/7 \ny = 5/7",
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Solve the system of linear equations: x + y = 3, 2x - y = 4. Find the values of x and y.",
+          "correct_answer": [2.0, 1.0],
+          "small_llm_answer": "To solve the system of linear equations, we can use the method of substitution or elimination. \n\nThe solution is: \nx = 19/7 \ny = 5/7",
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.8,
+      "is_solvable": true
+    },
+    {
+      "question": "Determine the point on the line y = -x + 4 that is farthest from the origin. Provide the coordinates of the point.",
+      "correct_answer": [0.0, 4.0],
+      "small_llm_answer": [4.0, 0.0],
+      "sub_problems": [
+        {
+          "question": "Find the y-intercept of the line y = -x + 4.",
+          "correct_answer": 4.0,
+          "small_llm_answer": [0.0, 4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the y-intercept of the line y = -x + 4.",
+          "correct_answer": 4.0,
+          "small_llm_answer": [0.0, 4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        },
+        {
+          "question": "Find the y-intercept of the line y = -x + 4.",
+          "correct_answer": 4.0,
+          "small_llm_answer": [0.0, 4.0],
+          "transformations_applid": [],
+          "difficulty_level": null,
+          "is_solvable": false
+        }
+      ],
+      "difficulty_level": 0.3,
+      "is_solvable": true
+    }
+  ],
+  "description": "\n                    Given a linear equation and a specific point, find the nearest point on the line \n                    to the given point. Provide your final answer directly as a tuple (x, y) without\n                    any additional explanation or commentary.\n                    Note: always mention the point as (x, y) in your question\n                    ",
+  "model_intelligence_ratio": 0.54,
+  "metadata": {}
+}

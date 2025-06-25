@@ -67,7 +67,7 @@ class TTRL:
     
     def _generate_transformations(self, problem_description: str):
         """ prepare list of transformations to be applied to the tuned model during ttrl """
-        transformations = self.dataset_generator.generate_transformations(
+        transformations = self.dataset_generator._generate_transformations(
             problem_description=problem_description,
             intelligence_ratio = 0.5 # TODO:: could be loaded from old tuned model 
         )
@@ -90,13 +90,13 @@ class TTRL:
         if isinstance(prompt, Problem):
             problem = prompt 
         elif isinstance(prompt, str):
-            problem = self.dataset_generator.generate_single_problem(prompt)
+            problem = self.dataset_generator._generate_single_problem(prompt)
         else:
             raise ValueError("Invalid prompt type. Expected str or Problem.")
 
         # 1- generate N variants for each question in Q_test # TODO:: make sure it is vladder compatiable
 
-        v_ttrl = self.dataset_generator.generate_variants(
+        v_ttrl = self.dataset_generator._generate_variants(
                                             problems=[problem], 
                                             transformations=self.transformations
                                             ) 

@@ -1,4 +1,5 @@
 from ladder.engines import LLMEngine, VerificationEngine
+from ladder.schema import Example
 from ladder.utils import setup_default_engines, load_basic_configs
 from ladder.data_gen import VLadder, Dataset
 from ladder.data_gen.generator import create_dataset_generator
@@ -18,19 +19,31 @@ dspy.disable_logging()
 def create_dataset(*,
                     config: LadderConfig,
                     problem_description: str, 
+                    examples: Optional[list[Example]] = [],
+                    custom_verification_engine: Optional[VerificationEngine] = None,
+                    custom_small_llm_engine: Optional[LLMEngine] = None,
+                    generate_solution_by_verification_engine: bool = False,
+                    answer_export_format: Literal["str", "dict", "list", "tuple", "set", "int"] = "str",
                     dataset_len: int) -> Dataset:
     """ build basic dataset generator and return all required engines / components """
     
-    llm_engine, verification_engine, difficulty_engine = setup_default_engines(config)
+    llm_engine, _verification_engine, difficulty_engine = setup_default_engines(config)
+    verification_engine = custom_verification_engine or _verification_engine
     dataset_generator = create_dataset_generator(
         llm_engine=llm_engine,
+        small_llm_engine=custom_small_llm_engine or LLMEngine(lm=config.finetune_llm_runner),
         verification_engine=verification_engine,
         difficulty_engine=difficulty_engine,
+        # dataset configs params 
+        answer_export_format=answer_export_format
+        
     )
     dataset = dataset_generator.generate_dataset(
         problem_description=problem_description,
         initial_problems=[],
-        max_dataset_size=dataset_len
+        max_dataset_size=dataset_len,
+        examples=examples,
+        auto_generate_solutions=generate_solution_by_verification_engine
     )
     return dataset
 

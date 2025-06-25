@@ -35,10 +35,10 @@ def setup_default_engines(config: LadderConfig) -> tuple[LLMEngine, Verification
     """ setup basic required engines for dataset generation process and ladder finetuning"""
 
     llm_engine = LLMEngine(lm=config.instructor_llm)
-    ver_llm_engine = LLMEngine(lm=config.finetune_llm_runner)
+    # ver_llm_engine = LLMEngine(lm=config.finetune_llm_runner)
 
     verification_engine = (
-        VerificationEngine(llm_engine=ver_llm_engine) 
+        VerificationEngine(llm_engine=llm_engine) 
     )
     difficulty_engine = (
         DifficultyEngine(llm_engine=llm_engine)

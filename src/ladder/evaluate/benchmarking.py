@@ -36,14 +36,14 @@ def benchmark_llms(
 
         # Load model if string path
         if isinstance(model_ref, str):
-            logger.info(f"Loading model from path: {model_ref}")
+            logger.debug(f"Loading model from path: {model_ref}")
             model = AutoModelForCausalLM.from_pretrained(model_ref).to(device)
             tokenizer = AutoTokenizer.from_pretrained(model_ref)
         else:
             model = model_ref.to(device)
             tokenizer = AutoTokenizer.from_pretrained(model_ref.name_or_path)
 
-        logger.info(f"Evaluating model: {model_name}")
+        logger.debug(f"Evaluating model: {model_name}")
 
         verifier = VerificationEngine(llm_engine=LLMEngine(lm=model))
         scores = []
@@ -92,7 +92,7 @@ def benchmark_llms(
 
     if save_csv_path:
         df.to_csv(save_csv_path, index=False)
-        logger.info(f"Saved benchmark results to {save_csv_path}")
+        logger.debug(f"Saved benchmark results to {save_csv_path}")
 
     return df
 

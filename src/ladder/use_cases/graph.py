@@ -1,131 +1,201 @@
-"""
-    This is our Main Usecase (Graph theory Problems)
-"""
-
-
-from ladder.engines import LLMEngine, VerificationEngine,DifficultyEngine
-from ladder.data_gen.generator import create_dataset_generator
-from ladder.utils import load_json
-from typing import Any 
-from dotenv import load_dotenv
+from ladder.engines import VerificationEngine, LLMEngine
+from typing_extensions import Union
 from loguru import logger
-import os 
+try:
+    from scipy.optimize import minimize_scalar
+    import numpy as np
+    import sympy as sp
+except ImportError:
+    raise ImportError("NearestPointVerificationEngine requires scipy, numpy, and sympy to be installed. run `pip install scipy numpy sympy`")
+import re
 
-load_dotenv()
-
-# TODO:: convert to jupyter notebook
-
-
-# 0- Setup Dependencies 
-
-## LLM
-# if u wanna use differet model  check here 
-## https://dspy.ai/learn/programming/language_models/
-os.environ["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY") # put here your openai api key 
-base_inference_llm = "openai/gpt-3.5-turbo"
-
-## LLM To Tune 
-base_finetune_llm = "meta-llama/Llama-2-7b-chat-hf" # This LLM will be used during finetuning
-
-## Problem description 
-problem_description = """
-Title: Balanced Paths in Weighted Directed Graphs 
-Description: In a directed graph  G=(V,E) with weighted edges, a path is considered balanced if, for every intermediate vertex  v∈V {s,t}, 
-the sum of the weights of edges entering v along the path equals the sum of the weights of edges leaving  v along the path. The graph may contain arbitrary weights, 
-including positive, negative, or zero values. The structure and properties of such paths depend on the topology of the graph and the distribution of weights.    
-"""
-## Inference LLM that will be used for different processes
-llm_engine = LLMEngine(lm=base_inference_llm)
-
-## Verification 
-class GraphVerificationEngine(VerificationEngine):
+class NearestPointVerificationEngine(VerificationEngine):
+    """ Custom Verification engine to select the nearest point on a curve / line to a reference point """
     
-    def verify(self, problem):
-        return super().verify(problem)
+    def verify(self, problem_question: str, given_answer: str | tuple):
+        # get correct answer 
+        closest_point = self.get_correct_answer(problem_question)
+        if not closest_point:
+            return 0
+        # Calculate difference between answer and closest point
+        answer_tuple = self._ensure_tuple(given_answer)
+        if not answer_tuple:
+            return 0
+        
+        difference = self._calculate_difference(answer_tuple, closest_point)
+        logger.success(f"difference: {difference}")
+        
+        return max(0, 1 - difference)
     
+    def get_correct_answer(self, problem_question: str ):
+        """
+        Get the correct answer for the problem question
+        """
+        equation_str, reference_point = self._parse_problem_question(problem_question)
+        if not equation_str or not reference_point:
+            return None
+        
+        return self._closest_point_on_curve_tool(equation_str, reference_point)
+    
+    def _parse_problem_question(self, question_text: str) -> tuple[str, tuple]:
+        """
+        Extract equation and reference point from problem question text.
+        """
+        equation_pattern = r'y\s*=\s*([-\d\s\*\+\/\.\^xX()]+?)(?=\s+[a-zA-Z]|\s*\(.*,.*\)|$)'
+        equation_match = re.search(equation_pattern, question_text)
 
-# TODO:: this should be  llm_engine with model to be finetuned
-verification_engine = GraphVerificationEngine(llm_engine=llm_engine) #LLM That will be used in dataset generation could be larger than llm used in finetuning
+        if not equation_match:
+            return None, None
 
-## Difficulty Engine (optional)
-difficulty_engine = DifficultyEngine(llm_engine=llm_engine)
+        equation_str = equation_match.group(1).strip()
+        equation_str = self._normalize_equation(equation_str)
 
-## inital dataset exampe (optional)
-inital_problems = []
+        point_pattern = r'\(\s*([+-]?\d*\.?\d+)\s*,\s*([+-]?\d*\.?\d+)\s*\)'
+        point_match = re.search(point_pattern, question_text)
 
-## Dataset Generator
+        if not point_match:
+            if "origin" in question_text.lower():
+                return equation_str, (0, 0)
+            return None, None
 
-dataset_generator = create_dataset_generator(
-    llm_engine=llm_engine,
-    verification_engine=verification_engine,
-    difficulty_engine=difficulty_engine,
-)
+        x_coord = float(point_match.group(1))
+        y_coord = float(point_match.group(2))
+        reference_point = (x_coord, y_coord)
 
-def generate_or_load_dataset(dataset_path:str, 
-                             problem_description: str, 
-                             num_of_datasets: int = 3,
-                     force_regenerate: bool = False):
-    """
-        generate required dataset for ladder finetuning process 
+        return equation_str, reference_point
+    def _normalize_equation(self, equation_str: str) -> str:
+        """
+        Normalize equation string to be compatible with SymPy.
+        Handles implicit multiplication like '2x' -> '2*x', '-0.5x' -> '-0.5*x'
+        """
+        # Remove extra whitespace
+        equation_str = equation_str.strip()
+        
+        # Handle implicit multiplication patterns
+        # Pattern: number followed by variable (like 2x, -0.5x, 3.14x)
+        equation_str = re.sub(r'([+-]?\d*\.?\d+)([a-zA-Z])', r'\1*\2', equation_str)
+        
+        # Handle cases where there might be spaces around operators
+        equation_str = re.sub(r'\s+', '', equation_str)  # Remove all spaces first
+        
+        # Add spaces around operators for readability (optional)
+        equation_str = re.sub(r'([+-])', r' \1 ', equation_str)
+        equation_str = re.sub(r'\s+', ' ', equation_str).strip()  # Clean up multiple spaces
+        
+        return equation_str
+    
+    def _ensure_tuple(self, answer: str | list| tuple) -> tuple:
+        """
+        Ensure the answer is a tuple format.
+        Handle various input formats: tuple, list, string representation, etc.
+        """
+
+        if not answer:
+            return None
+        try:
+            if isinstance(answer, tuple):
+                return answer
+            elif isinstance(answer, list) and len(answer) == 2:
+                return tuple(answer)
+            elif isinstance(answer, str):
+                # Try to parse string representation of tuple/coordinates
+                # Handle formats like "(1.5, 2.3)", "1.5, 2.3", "[1.5, 2.3]"
+                clean_str = answer.strip().strip('()[]')
+                coords = [float(x.strip()) for x in clean_str.split(',')]
+                if len(coords) == 2:
+                    return tuple(coords)
+                else:
+                    logger.warning(f"Answer string does not contain exactly 2 coordinates: {answer}")
+                    return None
+            else:
+                logger.warning(f"Answer format not supported: {type(answer)} - {answer}")
+                return None
+        except Exception as e:
+            return None
+ 
+    def _calculate_difference(self, answer_tuple: tuple, closest_point: tuple):
+        """
+        Calculate the Euclidean distance between answer tuple and closest point tuple.
+        """
+        x1, y1 = answer_tuple
+        x2, y2 = closest_point
+        
+        # Euclidean distance
+        difference = np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+        
+        return difference
+    
+    def _closest_point_on_curve_tool(self, equation_str: str, point: tuple) -> tuple:
+        """
+        Given a curve equation y = f(x) as string and a point (x0, y0),
+        returns the closest point (x, y) on the curve to the point.
 
         Args:
-            dataset_path (str): Path to save the dataset (if exist and force_regenerate=False, will skip dataset generation)
-            num_of_datasets (int, optional): Number of datasets to generate. Defaults to 3.
-            force_regenerate (bool, optional): If True, will regenerate the dataset even if it already exists. Defaults to False.
-    """
+            equation_str (str): Curve equation in terms of x, e.g. "-0.5*x**3 + 4*x**2 + 2*x + 5"
+            point (tuple): Coordinates (x0, y0) of the reference point
 
-    if not dataset_path:
-        dataset_path = "dataset.json"
+        Returns:
+            tuple: Closest point (x, y) on the curve
+        """
+        try:
+            x = sp.symbols('x')
+            expr_y = sp.sympify(equation_str)
+            x0, y0 = point
 
-    if not force_regenerate and os.path.exists(dataset_path):
-        logger.warning(f"Dataset already exists at {dataset_path}. Skipping dataset generation")
-        logger.info("Use force_regenerate=True if you want to regenerate the dataset")
-        return load_json(dataset_path)
+            # Convert sympy expression to numerical function
+            f_y = sp.lambdify(x, expr_y, 'numpy')
 
-    dataset = dataset_generator.generate_dataset(
-        problem_description=problem_description,
-        initial_problems=[],
-        max_dataset_size=num_of_datasets
-    )
-    dataset.to_json(dataset_path)
-   
-    return dataset 
+            # Define distance squared function
+            def dist_sq(x_val):
+                y_val = f_y(x_val)
+                return (x_val - x0)**2 + (y_val - y0)**2
+
+            # Minimize distance squared function over real numbers
+            result = minimize_scalar(dist_sq)
+
+            x_closest = result.x
+            y_closest = f_y(x_closest)
 
 
-def ladder(dataset_path: str = None):
-    """ Ladder Algorithm"""
-    raise NotImplementedError
+            return (x_closest, y_closest)
+            
+        except Exception as e:
+            logger.warning(f"Error in closest_point_on_curve_tool: {e}")
+            return None
+        
+
+
     
-
-
-def ttrl(model: Any = None, base_llm: str = None):
-    """TTRL Algorithm
+class PointResponseLLMEngine(LLMEngine):
     
-    Args:
-    model: if provided it will be used as base model for finetuning 
-    base_llm: if model is None , it will be used as base model for finetuning
-    """
-    raise NotImplementedError
-
-if __name__ == "__main__":
+    def generate(self, prompt, exported_format="str", *args, **kwargs):
+        prompt = f"""
+        You are Helpful assistant. Keep your answer short and to the point. dont show steps unless asked.
+        <USER INPUT>
+        {prompt}
+        
+        <YOUR RESPONSE>
+        """
+        response = self.lm(prompt, *args, **kwargs)
+        if isinstance(response, list):
+            response: str = response[0]
+        
+        # Extract point based on exported_format
+        return self._extract_point(response)
     
-    ## TODO:: 
-    ## 3- Verification Engine (how to verify LLM Solution)
-    ## 4- How to generate a list of problems which small LLMS cant solve but large LLMS can (use the verification engine)
-    ## 5- Implement the Difficulty Engine
-    ## 6- implement dataset generation (3 steps, verification engine, difficulty engine)
-    ## 7- check Dspy, Langraph, Langchain , smolagents, crewAI, Autogen
-    ## 8- check Distilabel
-    ## 9- check dspy optimizer, configs
-
-    # 1- generate dataset 
-    dataset = generate_or_load_dataset(dataset_path="dataset.json", force_regenerate=False)
-
-    # 2- Ladder 
-    # ladder_finetuned_model = ladder(dataset_path="dataset.json")
-
-    # 3- TTRL 
-    # ttrl_finetuned_model = ttrl(model=ladder_finetuned_model)
-
-    # 4- Verification & Benchmarking
-    # 5- Export Finetuned Models
+    def _extract_point(self, text: str) -> Union[tuple[float, float], str]:
+        """Extract the first coordinate point from text"""
+        pattern = r'\((-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)\)'
+        
+        match = re.search(pattern, text)
+        if match:
+            x, y = float(match.group(1)), float(match.group(2))
+            return (x, y)
+        
+        xy_pattern = r'x\s*=\s*(-?\d+(?:\.\d+)?),?\s*y\s*=\s*(-?\d+(?:\.\d+)?)'
+        xy_match = re.search(xy_pattern, text, re.IGNORECASE)
+        if xy_match:
+            x, y = float(xy_match.group(1)), float(xy_match.group(2))
+            return (x, y)
+        
+        return text 
